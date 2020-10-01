@@ -11,4 +11,7 @@ package gerenciador.Model;
  */
 class Lances {
     
+    private Usuario user;
+            
+            
 }

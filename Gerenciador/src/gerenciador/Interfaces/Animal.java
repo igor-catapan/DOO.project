@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gerenciador.Model;
-
-import java.util.List;
+package gerenciador.Interfaces;
 
 /**
  *
  * @author PICHAU
  */
-public class Leilao {
-    
-    private List<Lances> litaDeLances;
+public class Animal {
     
 }

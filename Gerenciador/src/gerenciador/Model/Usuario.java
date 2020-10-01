@@ -10,5 +10,7 @@ package gerenciador.Model;
  * @author PICHAU
  */
 class Usuario {
+ 
+    private String name;
     
 }
