@@ -11,19 +11,19 @@ package gerenciador.Model;
  */
 public class Lance implements Comparable<Lance>{
     
-    private Usuario user;
+    private Comprador user;
     private Double valor;
     
-    public Lance(Usuario user, Double valor){
+    public Lance(Comprador user, Double valor){
         this.user = user;
         this.valor = valor;
     }
 
-    public Usuario getUser() {
+    public Comprador getUser() {
         return user;
     }
 
-    public void setUser(Usuario user) {
+    public void setUser(Comprador user) {
         this.user = user;
     }
 
@@ -39,6 +39,7 @@ public class Lance implements Comparable<Lance>{
     public int compareTo(Lance o) {
        return Double.compare(this.valor, o.getValor());
     }
-            
+    
+          
             
 }

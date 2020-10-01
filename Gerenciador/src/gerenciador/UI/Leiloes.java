@@ -5,9 +5,11 @@ import gerenciador.Herancas.Animal;
 import gerenciador.Interfaces.ObjetoVenda;
 import gerenciador.Model.Lance;
 import gerenciador.Model.Leilao;
-import gerenciador.Model.Animais.Pato;
-import gerenciador.Model.Usuario;
+import gerenciador.Model.Animais.Boi;
+import gerenciador.Model.Comprador;
+import gerenciador.MyLogger;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 public class Leiloes extends javax.swing.JFrame {
@@ -16,6 +18,7 @@ public class Leiloes extends javax.swing.JFrame {
         initComponents();
     }
 
+    private static final String TAG = "Leiloes";
     public ArrayList<Leilao> leiloes = new ArrayList<>();
 
     @SuppressWarnings("unchecked")
@@ -134,19 +137,22 @@ public class Leiloes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbLeiloesAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLeiloesAdicionarMouseClicked
+        //TODO NA VERDADE AQUI ABRE OUTRA TELA vamos usar socket pra comunicacao de telas/retornar o novo leilao
+        
         String nome = tfLeilaoNomeTesteLista.getText();
         double preco = Double.parseDouble(tfLeilaoPrecoTesteLista.getText());
 
-        Pato pato = new Pato();
+        Boi boi = new Boi();
 
-        pato.setValor(preco);
-        pato.setNome(nome);
+        boi.setValorInicial(preco);
+        boi.setNome(nome);
 
-        Leilao leilao = new Leilao((ObjetoVenda) pato);
+        Leilao leilao = new Leilao((ObjetoVenda) boi);
 
-        Lance lance = new Lance(new Usuario(), pato.getValor());
+        Lance lance = new Lance(new Comprador("robert", 37, 42000), boi.getValor());
 
         try {
+            MyLogger.info(TAG, "Fazendo lance ");
             leilao.proposta(lance);
             leiloes.add(leilao);
 
@@ -160,7 +166,7 @@ public class Leiloes extends javax.swing.JFrame {
                     cont.getValorMaisAlto(),});
             }
         } catch (ValorMenorQueMaiorLance ex) {
-            System.out.println("Valor Invalido: " + ex.getMessage());
+            MyLogger.debug(TAG, "Valor Invalido: " + ex.getMessage());
         }
 
 

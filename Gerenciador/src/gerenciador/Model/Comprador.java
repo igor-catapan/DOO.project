@@ -5,22 +5,21 @@
  */
 package gerenciador.Model;
 
+import gerenciador.Herancas.Pessoa;
+
 /**
  *
  * @author PICHAU
  */
-public class Usuario {
+public class Comprador extends Pessoa{
+
+    public Comprador(String nome, int idade, double dinheiro) {
+        super(nome, idade, dinheiro);
+    }
 
   
-    private String name;
     
-      public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
  
     
 }

@@ -12,7 +12,7 @@ import gerenciador.Interfaces.ObjetoVenda;
  *
  * @author PICHAU
  */
-public class Pato extends Animal implements ObjetoVenda {
+public class Boi extends Animal implements ObjetoVenda {
 
     
     private double valor;
@@ -36,11 +36,11 @@ public class Pato extends Animal implements ObjetoVenda {
     }
 
     @Override
-    public String getIdade() {
-        return "eae";
+    public int getIdade() {
+        return 6;
     }
     
-    public void setValor(double valor){
+    public void setValorInicial(double valor){
         this.valor = valor;
     }
 

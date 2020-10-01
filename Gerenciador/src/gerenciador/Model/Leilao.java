@@ -34,7 +34,16 @@ public class Leilao {
     }
     
 
-    public void proposta(Usuario user, Double valor) throws ValorMenorQueMaiorLance {
+     public void proposta(String nome, int idade, double dinheiro, Double valor) throws ValorMenorQueMaiorLance {
+        Comprador user = new Comprador(nome, idade, dinheiro);
+        Lance lance = new Lance(user, valor);   
+
+        proposta(lance);
+
+    }
+    
+    
+    public void proposta(Comprador user, Double valor) throws ValorMenorQueMaiorLance {
         Lance lance = new Lance(user, valor);
     
 
@@ -65,7 +74,14 @@ public class Leilao {
         return valorMaisAlto;
     }
     
-    
+     public List<Lance> getTresMaioresLances(){
+         
+         int lastIndex = Math.min(this.lances.size(), 3);
+         
+        return lances.subList(0, lastIndex);
+        
+    }
+     
     
 
 }
