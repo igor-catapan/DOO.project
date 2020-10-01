@@ -3,15 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gerenciador.Model;
+package gerenciador.Interfaces;
 
 /**
  *
  * @author PICHAU
  */
-class Lances {
+public interface ObjetoVenda {
     
-    private Usuario user;
-            
-            
+   
+    public String getNome();
+
+    public String getTipo();
+
+    public Double getValor();
+    
+    public String getIdade();
 }

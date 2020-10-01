@@ -1,19 +1,23 @@
-
 package gerenciador.UI;
 
+import gerenciador.Exceptions.ValorMenorQueMaiorLance;
+import gerenciador.Herancas.Animal;
+import gerenciador.Interfaces.ObjetoVenda;
+import gerenciador.Model.Lance;
 import gerenciador.Model.Leilao;
+import gerenciador.Model.Pato;
+import gerenciador.Model.Usuario;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
-
 public class Leiloes extends javax.swing.JFrame {
-
 
     public Leiloes() {
         initComponents();
-       }
+    }
 
-public ArrayList<Leilao> leiloes = new ArrayList<>();
+    public ArrayList<Leilao> leiloes = new ArrayList<>();
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -32,17 +36,17 @@ public ArrayList<Leilao> leiloes = new ArrayList<>();
 
         tbLeilaoLeiloes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Nome", "Preço"
+                "Nome", "Tipo", "Preço"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -89,7 +93,6 @@ public ArrayList<Leilao> leiloes = new ArrayList<>();
                         .addComponent(jbLeiloesDarLance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpLeiloesLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(tfLeilaoPrecoTesteLista, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(59, 59, 59))))
         );
@@ -133,28 +136,37 @@ public ArrayList<Leilao> leiloes = new ArrayList<>();
     private void jbLeiloesAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLeiloesAdicionarMouseClicked
         String nome = tfLeilaoNomeTesteLista.getText();
         double preco = Double.parseDouble(tfLeilaoPrecoTesteLista.getText());
-        
-        Leilao l = new Leilao();
-        l.setNome(nome);
-        l.setPreco(preco);
-        
-        leiloes.add(l);
-        
-        DefaultTableModel modelo = (DefaultTableModel) tbLeilaoLeiloes.getModel();
-        modelo.setNumRows(0);
-        
-        for(Leilao cont:leiloes){
-        modelo.addRow(new Object []{
-            cont.getNome(),
-            cont.getPreco()
-                
-            
-        });
-    }
-    }//GEN-LAST:event_jbLeiloesAdicionarMouseClicked
-    
 
- 
+        Pato pato = new Pato();
+
+        pato.setValor(preco);
+        pato.setNome(nome);
+
+        Leilao leilao = new Leilao((ObjetoVenda) pato);
+
+        Lance lance = new Lance(new Usuario(), pato.getValor());
+
+        try {
+            leilao.proposta(lance);
+            leiloes.add(leilao);
+
+            DefaultTableModel modelo = (DefaultTableModel) tbLeilaoLeiloes.getModel();
+            modelo.setNumRows(0);
+
+            for (Leilao cont : leiloes) {
+                modelo.addRow(new Object[]{
+                    cont.getNome(),
+                    "TODO",
+                    cont.getValorMaisAlto(),});
+            }
+        } catch (ValorMenorQueMaiorLance ex) {
+            System.out.println("Valor Invalido: " + ex.getMessage());
+        }
+
+
+    }//GEN-LAST:event_jbLeiloesAdicionarMouseClicked
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbLeiloesAdicionar;

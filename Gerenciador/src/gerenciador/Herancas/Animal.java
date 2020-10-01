@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gerenciador.Interfaces;
+package gerenciador.Herancas;
 
 /**
  *
  * @author PICHAU
  */
-public class Animal {
+public abstract class Animal{
+    
+   protected String nome;
+    
     
 }

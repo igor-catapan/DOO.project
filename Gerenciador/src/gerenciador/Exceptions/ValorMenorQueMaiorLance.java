@@ -3,24 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gerenciador.Model;
+package gerenciador.Exceptions;
 
 /**
  *
  * @author PICHAU
  */
-public class Usuario {
+public class ValorMenorQueMaiorLance extends Exception {
 
-  
-    private String name;
-    
-      public String getName() {
-        return name;
+    public ValorMenorQueMaiorLance(String message) {
+        super(message);
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
- 
     
 }
