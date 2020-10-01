@@ -1,10 +1,13 @@
 
 package gerenciador;
 
+import gerenciador.UI.Login;
+
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("testado");
+        
+        new Login().setVisible(true);
     }
     
 }
