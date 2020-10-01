@@ -5,7 +5,7 @@ import gerenciador.Herancas.Animal;
 import gerenciador.Interfaces.ObjetoVenda;
 import gerenciador.Model.Lance;
 import gerenciador.Model.Leilao;
-import gerenciador.Model.Pato;
+import gerenciador.Model.Animais.Pato;
 import gerenciador.Model.Usuario;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
