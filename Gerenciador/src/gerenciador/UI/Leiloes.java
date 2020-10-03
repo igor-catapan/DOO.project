@@ -96,7 +96,7 @@ public class Leiloes extends javax.swing.JFrame{
         jpLeiloesLayout.setHorizontalGroup(
             jpLeiloesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpLeiloesLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpLeiloesLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
@@ -119,7 +119,7 @@ public class Leiloes extends javax.swing.JFrame{
                     .addComponent(jbLeiloesFinalizar)
                     .addComponent(jbLeiloesDarLance))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -131,7 +131,7 @@ public class Leiloes extends javax.swing.JFrame{
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,8 +165,6 @@ public class Leiloes extends javax.swing.JFrame{
 
     private void jbLeiloesAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLeiloesAdicionarMouseClicked
         //TODO NA VERDADE AQUI ABRE OUTRA TELA que recebe a lista com leiloes para adicionar
-
-        
         
 //        String nome = tfLeilaoNomeTesteLista.getText();
 //        String precoStr = tfLeilaoPrecoTesteLista.getText();
@@ -182,7 +180,7 @@ public class Leiloes extends javax.swing.JFrame{
 //                    "TODO",
 //                    cont.getValorMaisAlto(),});
 //            }
-            
+            setVisible(false);
         return;
         
 //        double preco = Double.parseDouble(precoStr);

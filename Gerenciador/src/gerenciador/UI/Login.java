@@ -4,6 +4,7 @@ package gerenciador.UI;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 
 public class Login extends javax.swing.JFrame {
@@ -11,6 +12,7 @@ public class Login extends javax.swing.JFrame {
  
     public Login() {
         initComponents();
+       
     }
 
     @SuppressWarnings("unchecked")
@@ -136,6 +138,11 @@ public class Login extends javax.swing.JFrame {
         String nome = tfLoginNome.getText();
         boolean comprador = rbLoginComprador.isSelected();
         boolean leiloeiro = rbLoginLeiloeiro.isSelected();
+        new Leiloes().setVisible(true);
+        this.setVisible(false);
+        if(true)
+            return;
+        
         if (leiloeiro)
             new Leiloes().setVisible(true);
         else if (comprador)
