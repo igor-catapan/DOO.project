@@ -23,8 +23,8 @@ public class Leiloes extends javax.swing.JFrame {
     }
 
     private static final String TAG = "Leiloes";
-    
-    public LojaDeLeiloes leiloes =  new LojaDeLeiloes();
+
+    public LojaDeLeiloes leiloes = new LojaDeLeiloes();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -44,23 +44,15 @@ public class Leiloes extends javax.swing.JFrame {
 
         tbLeilaoLeiloes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null},
+                {null},
+                {null},
+                {null}
             },
             new String [] {
-                "Nome", "Tipo", "Preço"
+                "Leiloes Disponíveis"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane2.setViewportView(tbLeilaoLeiloes);
 
         jbLeiloesAdicionar.setText("Adicionar");
@@ -85,6 +77,11 @@ public class Leiloes extends javax.swing.JFrame {
         });
 
         jbLeiloesDarLance.setText("Dar Lance");
+        jbLeiloesDarLance.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbLeiloesDarLanceMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpLeiloesLayout = new javax.swing.GroupLayout(jpLeiloes);
         jpLeiloes.setLayout(jpLeiloesLayout);
@@ -153,25 +150,15 @@ public class Leiloes extends javax.swing.JFrame {
 
     private void jbLeiloesAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLeiloesAdicionarMouseClicked
         //TODO NA VERDADE AQUI ABRE OUTRA TELA que recebe a lista com leiloes para adicionar
+
+        
         
         String nome = tfLeilaoNomeTesteLista.getText();
-        double preco = Double.parseDouble(tfLeilaoPrecoTesteLista.getText());
-
-        Boi boi = new Boi();
-
-        boi.setValorInicial(preco);
-        boi.setNome(nome);
-
-        Leilao leilao = new Leilao((ObjetoVenda) boi);
-
-        Lance lance = new Lance(new Comprador("robert", 37, 42000), boi.getValor());
-
-        try {
-            MyLogger.info(TAG, "Fazendo lance ");
-            leilao.proposta(lance);
-            leiloes.adicionaLeilao(leilao);
-
-            DefaultTableModel modelo = (DefaultTableModel) tbLeilaoLeiloes.getModel();
+        String precoStr = tfLeilaoPrecoTesteLista.getText();
+        
+        
+        new CriaLeilao(leiloes).setVisible(true);
+         DefaultTableModel modelo = (DefaultTableModel) tbLeilaoLeiloes.getModel();
             modelo.setNumRows(0);
 
             for (Leilao cont : leiloes.getLeiloes()) {
@@ -180,9 +167,37 @@ public class Leiloes extends javax.swing.JFrame {
                     "TODO",
                     cont.getValorMaisAlto(),});
             }
-        } catch (ValorMenorQueMaiorLance ex) {
-            MyLogger.debug(TAG, "Valor Invalido: " + ex.getMessage());
-        }
+            
+        return;
+        
+//        double preco = Double.parseDouble(precoStr);
+//
+//        Boi boi = new Boi();
+//
+//        boi.setValorInicial(preco);
+//        boi.setNome(nome);
+//
+//        Leilao leilao = new Leilao((ObjetoVenda) boi);
+//
+//        Lance lance = new Lance(new Comprador("robert", 37, 42000), boi.getValor());
+//
+//        try {
+//            MyLogger.info(TAG, "Fazendo lance ");
+//            leilao.proposta(lance);
+//            leiloes.adicionaLeilao(leilao);
+//
+//            DefaultTableModel modelo = (DefaultTableModel) tbLeilaoLeiloes.getModel();
+//            modelo.setNumRows(0);
+//
+//            for (Leilao cont : leiloes.getLeiloes()) {
+//                modelo.addRow(new Object[]{
+//                    cont.getNome(),
+//                    "TODO",
+//                    cont.getValorMaisAlto(),});
+//            }
+//        } catch (ValorMenorQueMaiorLance ex) {
+//            MyLogger.debug(TAG, "Valor Invalido: " + ex.getMessage());
+//        }
 
 
     }//GEN-LAST:event_jbLeiloesAdicionarMouseClicked
@@ -192,14 +207,25 @@ public class Leiloes extends javax.swing.JFrame {
     }//GEN-LAST:event_jbLeiloesFinalizarActionPerformed
 
     private void jbLeiloesFinalizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLeiloesFinalizarMouseClicked
-        //TODO ADCIONAR BOTAO PARA VISUALIZAR LEILAO
-        try{
-        Visualizar();
-        }catch(Exception e){
+       
+         try {
+            finalizaLeilao();
+            
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "ErroCaixaNaoSelecionada", JOptionPane.ERROR_MESSAGE);
         }
         
+        
     }//GEN-LAST:event_jbLeiloesFinalizarMouseClicked
+
+    private void jbLeiloesDarLanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLeiloesDarLanceMouseClicked
+
+        try {
+            Visualizar();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "ErroCaixaNaoSelecionada", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jbLeiloesDarLanceMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -214,11 +240,19 @@ public class Leiloes extends javax.swing.JFrame {
     private javax.swing.JTextField tfLeilaoPrecoTesteLista;
     // End of variables declaration//GEN-END:variables
 
-    private void Visualizar() throws LeilaoNaoEncontrado, LeilaoNaoSelecionadoParaVisualizar{
-        int leilaoIndex = tbLeilaoLeiloes.getSelectedRow();        
+    private void Visualizar() throws LeilaoNaoEncontrado, LeilaoNaoSelecionadoParaVisualizar {
+        int leilaoIndex = tbLeilaoLeiloes.getSelectedRow();
         Leilao leilao = leiloes.getLeilao(leilaoIndex);
         new VisualizaLeilao(leilao).setVisible(true);
     }
 
-    
+    private void finalizaLeilao() {
+        int leilaoIndex = tbLeilaoLeiloes.getSelectedRow();
+        leiloes.removeLeilao(leilaoIndex);
+        
+        
+        DefaultTableModel modelo = (DefaultTableModel) tbLeilaoLeiloes.getModel();
+        modelo.removeRow(leilaoIndex);
+    }
+
 }

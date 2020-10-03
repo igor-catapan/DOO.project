@@ -21,7 +21,7 @@ public class Boi extends Animal implements ObjetoVenda {
     
     @Override
     public String getNome() {
-        return "boi";
+        return nome;
     }
 
     @Override

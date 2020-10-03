@@ -19,6 +19,7 @@ public class LojaDeLeiloes {
     
     
     private ArrayList<Leilao> leiloes = new ArrayList<>();
+    private ArrayList<Leilao> finalizados = new ArrayList<>();
     
     
     public void adicionaLeilao(Leilao leilao){
@@ -28,7 +29,7 @@ public class LojaDeLeiloes {
     public void removeLeilao(int indice){
         validaIndice(indice);
         
-        leiloes.remove(indice);
+        finalizados.add(leiloes.remove(indice));
         
         
     }
