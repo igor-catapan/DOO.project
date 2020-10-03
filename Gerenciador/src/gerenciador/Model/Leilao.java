@@ -45,8 +45,6 @@ public class Leilao {
     
     public void proposta(Comprador user, Double valor) throws ValorMenorQueMaiorLance {
         Lance lance = new Lance(user, valor);
-    
-
         proposta(lance);
 
     }
@@ -80,6 +78,10 @@ public class Leilao {
          
         return lances.subList(0, lastIndex);
         
+    }
+
+    public int getIdade() {
+        return objeto.getIdade();
     }
      
     

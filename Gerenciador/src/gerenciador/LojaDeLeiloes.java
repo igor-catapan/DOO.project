@@ -8,6 +8,7 @@ package gerenciador;
 import gerenciador.Exceptions.LeilaoNaoEncontrado;
 import gerenciador.Exceptions.LeilaoNaoSelecionadoParaVisualizar;
 import gerenciador.Model.Leilao;
+import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,17 +21,21 @@ public class LojaDeLeiloes {
     
     private ArrayList<Leilao> leiloes = new ArrayList<>();
     private ArrayList<Leilao> finalizados = new ArrayList<>();
+
+   
+    
     
     
     public void adicionaLeilao(Leilao leilao){
         leiloes.add(leilao);
+             
     }
     
     public void removeLeilao(int indice){
         validaIndice(indice);
         
         finalizados.add(leiloes.remove(indice));
-        
+       
         
     }
     
@@ -53,6 +58,8 @@ public class LojaDeLeiloes {
         
         return leiloes.get(leilaoIndex);
     }
+
+  
     
     
     

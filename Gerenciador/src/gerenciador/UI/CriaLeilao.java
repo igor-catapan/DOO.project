@@ -25,9 +25,9 @@ public class CriaLeilao extends javax.swing.JFrame {
      * Creates new form CreateAuction
      */
     
-    private LojaDeLeiloes leiloes;
+    private Leiloes leiloes;
     private static final String TAG = "CriaLeilao";
-    public CriaLeilao(LojaDeLeiloes leiloes) {
+    public CriaLeilao(Leiloes leiloes) {
         initComponents();
         this.leiloes = leiloes;
         

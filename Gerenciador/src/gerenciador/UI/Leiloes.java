@@ -11,15 +11,18 @@ import gerenciador.Model.Leilao;
 import gerenciador.Model.Animais.Boi;
 import gerenciador.Model.Comprador;
 import gerenciador.MyLogger;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class Leiloes extends javax.swing.JFrame {
+public class Leiloes extends javax.swing.JFrame{
 
     public Leiloes() {
         initComponents();
+        
     }
 
     private static final String TAG = "Leiloes";
@@ -37,22 +40,27 @@ public class Leiloes extends javax.swing.JFrame {
         jbLeiloesDeletar = new javax.swing.JButton();
         jbLeiloesFinalizar = new javax.swing.JButton();
         jbLeiloesDarLance = new javax.swing.JButton();
-        tfLeilaoNomeTesteLista = new javax.swing.JTextField();
-        tfLeilaoPrecoTesteLista = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tbLeilaoLeiloes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+
             },
             new String [] {
-                "Leiloes Disponíveis"
+                "Nome", "Tipo", "Preco", "Idade"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tbLeilaoLeiloes);
 
         jbLeiloesAdicionar.setText("Adicionar");
@@ -88,44 +96,49 @@ public class Leiloes extends javax.swing.JFrame {
         jpLeiloesLayout.setHorizontalGroup(
             jpLeiloesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpLeiloesLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
-            .addGroup(jpLeiloesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpLeiloesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpLeiloesLayout.createSequentialGroup()
-                        .addComponent(jbLeiloesAdicionar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbLeiloesDeletar)
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpLeiloesLayout.createSequentialGroup()
-                        .addComponent(tfLeilaoNomeTesteLista, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)))
-                .addGroup(jpLeiloesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpLeiloesLayout.createSequentialGroup()
-                        .addComponent(jbLeiloesFinalizar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbLeiloesDarLance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpLeiloesLayout.createSequentialGroup()
-                        .addComponent(tfLeilaoPrecoTesteLista, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59))))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpLeiloesLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jbLeiloesAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
+                .addComponent(jbLeiloesDeletar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
+                .addComponent(jbLeiloesFinalizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
+                .addComponent(jbLeiloesDarLance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(29, 29, 29))
         );
         jpLeiloesLayout.setVerticalGroup(
             jpLeiloesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpLeiloesLayout.createSequentialGroup()
+                .addGap(74, 74, 74)
                 .addGroup(jpLeiloesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfLeilaoNomeTesteLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfLeilaoPrecoTesteLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addGroup(jpLeiloesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbLeiloesAdicionar)
+                    .addComponent(jbLeiloesAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbLeiloesDeletar)
                     .addComponent(jbLeiloesFinalizar)
                     .addComponent(jbLeiloesDarLance))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
                 .addContainerGap())
+        );
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Leilões Disponíveis");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -136,12 +149,14 @@ public class Leiloes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jpLeiloes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jpLeiloes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jpLeiloes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -153,20 +168,20 @@ public class Leiloes extends javax.swing.JFrame {
 
         
         
-        String nome = tfLeilaoNomeTesteLista.getText();
-        String precoStr = tfLeilaoPrecoTesteLista.getText();
+//        String nome = tfLeilaoNomeTesteLista.getText();
+//        String precoStr = tfLeilaoPrecoTesteLista.getText();
         
         
-        new CriaLeilao(leiloes).setVisible(true);
-         DefaultTableModel modelo = (DefaultTableModel) tbLeilaoLeiloes.getModel();
-            modelo.setNumRows(0);
-
-            for (Leilao cont : leiloes.getLeiloes()) {
-                modelo.addRow(new Object[]{
-                    cont.getNome(),
-                    "TODO",
-                    cont.getValorMaisAlto(),});
-            }
+        new CriaLeilao(this).setVisible(true);
+//         DefaultTableModel modelo = (DefaultTableModel) tbLeilaoLeiloes.getModel();
+//            modelo.setNumRows(0);
+//
+//            for (Leilao cont : leiloes.getLeiloes()) {
+//                modelo.addRow(new Object[]{
+//                    cont.getNome(),
+//                    "TODO",
+//                    cont.getValorMaisAlto(),});
+//            }
             
         return;
         
@@ -229,6 +244,8 @@ public class Leiloes extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbLeiloesAdicionar;
     private javax.swing.JButton jbLeiloesDarLance;
@@ -236,8 +253,6 @@ public class Leiloes extends javax.swing.JFrame {
     private javax.swing.JButton jbLeiloesFinalizar;
     private javax.swing.JPanel jpLeiloes;
     private javax.swing.JTable tbLeilaoLeiloes;
-    private javax.swing.JTextField tfLeilaoNomeTesteLista;
-    private javax.swing.JTextField tfLeilaoPrecoTesteLista;
     // End of variables declaration//GEN-END:variables
 
     private void Visualizar() throws LeilaoNaoEncontrado, LeilaoNaoSelecionadoParaVisualizar {
@@ -253,6 +268,24 @@ public class Leiloes extends javax.swing.JFrame {
         
         DefaultTableModel modelo = (DefaultTableModel) tbLeilaoLeiloes.getModel();
         modelo.removeRow(leilaoIndex);
+    }
+
+    public void atualizaTabela() {
+        
+        DefaultTableModel modelo = (DefaultTableModel) tbLeilaoLeiloes.getModel();
+            modelo.setNumRows(0);
+        for (Leilao cont : leiloes.getLeiloes()) {
+                modelo.addRow(new Object[]{
+                    cont.getNome(),
+                    "TODO",
+                    cont.getValorMaisAlto(),
+                cont.getIdade()});
+            }
+    }
+
+    void adicionaLeilao(Leilao leilao) {
+        leiloes.adicionaLeilao(leilao);
+        atualizaTabela();
     }
 
 }
