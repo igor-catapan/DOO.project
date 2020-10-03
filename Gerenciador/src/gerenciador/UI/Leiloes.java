@@ -5,6 +5,7 @@ import gerenciador.Exceptions.LeilaoNaoSelecionadoParaVisualizar;
 import gerenciador.Exceptions.ValorMenorQueMaiorLance;
 import gerenciador.Herancas.Animal;
 import gerenciador.Interfaces.ObjetoVenda;
+import gerenciador.LojaDeLeiloes;
 import gerenciador.Model.Lance;
 import gerenciador.Model.Leilao;
 import gerenciador.Model.Animais.Boi;
@@ -22,7 +23,8 @@ public class Leiloes extends javax.swing.JFrame {
     }
 
     private static final String TAG = "Leiloes";
-    public ArrayList<Leilao> leiloes = new ArrayList<>();
+    
+    public LojaDeLeiloes leiloes =  new LojaDeLeiloes();
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -150,7 +152,7 @@ public class Leiloes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbLeiloesAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLeiloesAdicionarMouseClicked
-        //TODO NA VERDADE AQUI ABRE OUTRA TELA que a lista com leiloes para adicionar
+        //TODO NA VERDADE AQUI ABRE OUTRA TELA que recebe a lista com leiloes para adicionar
         
         String nome = tfLeilaoNomeTesteLista.getText();
         double preco = Double.parseDouble(tfLeilaoPrecoTesteLista.getText());
@@ -167,12 +169,12 @@ public class Leiloes extends javax.swing.JFrame {
         try {
             MyLogger.info(TAG, "Fazendo lance ");
             leilao.proposta(lance);
-            leiloes.add(leilao);
+            leiloes.adicionaLeilao(leilao);
 
             DefaultTableModel modelo = (DefaultTableModel) tbLeilaoLeiloes.getModel();
             modelo.setNumRows(0);
 
-            for (Leilao cont : leiloes) {
+            for (Leilao cont : leiloes.getLeiloes()) {
                 modelo.addRow(new Object[]{
                     cont.getNome(),
                     "TODO",
@@ -213,20 +215,10 @@ public class Leiloes extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void Visualizar() throws LeilaoNaoEncontrado, LeilaoNaoSelecionadoParaVisualizar{
-        int leilaoIndex = tbLeilaoLeiloes.getSelectedRow();
-        validaIndice(leilaoIndex);    
-        
-        new VisualizaLeilao(leiloes.get(leilaoIndex)).setVisible(true);
+        int leilaoIndex = tbLeilaoLeiloes.getSelectedRow();        
+        Leilao leilao = leiloes.getLeilao(leilaoIndex);
+        new VisualizaLeilao(leilao).setVisible(true);
     }
 
-    private void validaIndice(int index) throws LeilaoNaoEncontrado, LeilaoNaoSelecionadoParaVisualizar {
-        if(index < 0)
-            throw new LeilaoNaoSelecionadoParaVisualizar("Por favor selecione um leião");
-        
-        if(index >= leiloes.size())
-            throw new LeilaoNaoEncontrado("Por favor selecione um leilao valido");
-        
-        
-        
-    }
+    
 }
