@@ -9,13 +9,14 @@ package gerenciador.Exceptions;
  *
  * @author PICHAU
  */
-public class ValorMenorQueMaiorLance extends Exception {
-
-    public ValorMenorQueMaiorLance(String message) {
+public class LeilaoNaoEncontrado extends IndexOutOfBoundsException{
+    public LeilaoNaoEncontrado(String message) {
         super(message);
     }
     
-     public ValorMenorQueMaiorLance() {
+     public LeilaoNaoEncontrado() {
+         
+     }
        
-    }
+    
 }

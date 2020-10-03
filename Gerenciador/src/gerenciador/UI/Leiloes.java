@@ -1,5 +1,7 @@
 package gerenciador.UI;
 
+import gerenciador.Exceptions.LeilaoNaoEncontrado;
+import gerenciador.Exceptions.LeilaoNaoSelecionadoParaVisualizar;
 import gerenciador.Exceptions.ValorMenorQueMaiorLance;
 import gerenciador.Herancas.Animal;
 import gerenciador.Interfaces.ObjetoVenda;
@@ -10,6 +12,7 @@ import gerenciador.Model.Comprador;
 import gerenciador.MyLogger;
 import java.util.ArrayList;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Leiloes extends javax.swing.JFrame {
@@ -68,6 +71,16 @@ public class Leiloes extends javax.swing.JFrame {
         jbLeiloesDeletar.setText("Deletar");
 
         jbLeiloesFinalizar.setText("Finalizar");
+        jbLeiloesFinalizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbLeiloesFinalizarMouseClicked(evt);
+            }
+        });
+        jbLeiloesFinalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLeiloesFinalizarActionPerformed(evt);
+            }
+        });
 
         jbLeiloesDarLance.setText("Dar Lance");
 
@@ -137,7 +150,7 @@ public class Leiloes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbLeiloesAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLeiloesAdicionarMouseClicked
-        //TODO NA VERDADE AQUI ABRE OUTRA TELA vamos usar socket pra comunicacao de telas/retornar o novo leilao
+        //TODO NA VERDADE AQUI ABRE OUTRA TELA que a lista com leiloes para adicionar
         
         String nome = tfLeilaoNomeTesteLista.getText();
         double preco = Double.parseDouble(tfLeilaoPrecoTesteLista.getText());
@@ -172,6 +185,20 @@ public class Leiloes extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jbLeiloesAdicionarMouseClicked
 
+    private void jbLeiloesFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLeiloesFinalizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbLeiloesFinalizarActionPerformed
+
+    private void jbLeiloesFinalizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLeiloesFinalizarMouseClicked
+        //TODO ADCIONAR BOTAO PARA VISUALIZAR LEILAO
+        try{
+        Visualizar();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "ErroCaixaNaoSelecionada", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_jbLeiloesFinalizarMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane2;
@@ -184,4 +211,22 @@ public class Leiloes extends javax.swing.JFrame {
     private javax.swing.JTextField tfLeilaoNomeTesteLista;
     private javax.swing.JTextField tfLeilaoPrecoTesteLista;
     // End of variables declaration//GEN-END:variables
+
+    private void Visualizar() throws LeilaoNaoEncontrado, LeilaoNaoSelecionadoParaVisualizar{
+        int leilaoIndex = tbLeilaoLeiloes.getSelectedRow();
+        validaIndice(leilaoIndex);    
+        
+        new VisualizaLeilao(leiloes.get(leilaoIndex)).setVisible(true);
+    }
+
+    private void validaIndice(int index) throws LeilaoNaoEncontrado, LeilaoNaoSelecionadoParaVisualizar {
+        if(index < 0)
+            throw new LeilaoNaoSelecionadoParaVisualizar("Por favor selecione um leião");
+        
+        if(index >= leiloes.size())
+            throw new LeilaoNaoEncontrado("Por favor selecione um leilao valido");
+        
+        
+        
+    }
 }
