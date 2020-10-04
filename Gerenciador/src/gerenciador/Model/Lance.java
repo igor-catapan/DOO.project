@@ -39,7 +39,7 @@ public class Lance implements Comparable<Lance>, Serializable{
 
      @Override
     public int compareTo(Lance o) {
-       return Double.compare(this.valor, o.getValor());
+       return Double.compare(o.getValor(), this.valor);
     }
     
           

@@ -38,7 +38,7 @@ public class Leilao implements Serializable {
     
 
      public void proposta(String nome, int idade, double dinheiro, Double valor) throws ValorMenorQueMaiorLance {
-        Comprador user = new Comprador(nome, idade, dinheiro);
+        Comprador user = new Comprador(nome);
         Lance lance = new Lance(user, valor);   
 
         proposta(lance);

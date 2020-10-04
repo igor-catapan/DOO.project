@@ -149,8 +149,8 @@ public class Login extends javax.swing.JFrame {
         boolean leiloeiro = rbLoginLeiloeiro.isSelected();
         //new Leiloes().setVisible(true);
         this.setVisible(false);
-        if(true)
-            return;
+//        if(true)
+//            return;
         
         if (leiloeiro)
             new Leiloes((Pessoa) new Leiloeiro(nome)).setVisible(true);
