@@ -21,15 +21,19 @@ public class TiposUtil {
     public static final String CLASSICO = "Classico";
     public static final String OVELHA = "Ovelha";
     public static final String BOI = "Boi";
+    public static final String VEICULOS = "Veiculos";
+    public static final String ANIMAIS = "Animais";
+    
 
     public static List<String> getTipos() {
         List<String> lista = new LinkedList<String>();
-        lista.add("Animais");
-        lista.add("Veiculos");
+        lista.add(ANIMAIS);
+        lista.add(VEICULOS);
 
         return lista;
 
     }
+ 
 
     public static List<String> getTiposDeVeiculos() {
         List<String> lista = new LinkedList<String>();

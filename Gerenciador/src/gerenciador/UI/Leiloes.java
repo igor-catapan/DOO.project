@@ -18,8 +18,16 @@ import gerenciador.MyLogger;
 import static gerenciador.utils.JOptionsPaneUtil.showErrorMessage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -28,7 +36,12 @@ public class Leiloes extends javax.swing.JFrame {
 
     public Leiloes() {
         initComponents();
-        salva();
+        try {
+            leLeiloes();
+        } catch (Exception ex) {
+            System.out.println("ALGO DE ERRADO");
+            ex.printStackTrace();
+        }
     }
 
     private static final String TAG = "Leiloes";
@@ -232,7 +245,12 @@ public class Leiloes extends javax.swing.JFrame {
     }
 
     public void atualizaTabela() {
-
+        try {
+            System.out.println("salvando");
+            salva();
+        } catch (IOException ex) {
+            Logger.getLogger(Leiloes.class.getName()).log(Level.SEVERE, null, ex);
+        }
         DefaultTableModel modelo = (DefaultTableModel) tbLeilaoLeiloes.getModel();
         modelo.setNumRows(0);
         for (Leilao cont : leiloes.getLeiloes()) {
@@ -247,17 +265,52 @@ public class Leiloes extends javax.swing.JFrame {
     void adicionaLeilao(Leilao leilao) {
         leiloes.adicionaLeilao(leilao);
         atualizaTabela();
+
     }
 
     public Leilao adicionaLeilao(String precoStr, String nome, int idade, String tipo, String subTipo, String descricao) throws PrecoInvalido, NomeInvalido, IdadeInvalida, PrecoNaoENumero {
         return leiloes.adicionaLeilao(precoStr, nome, idade, tipo, subTipo, descricao);
     }
 
-    public void salva() {
-        URL filePath = Class.class.getClassLoader().getResource("teste");
+    public void salva() throws IOException {
 
-        System.out.println(filePath.getPath());
+        String filePath = System.getProperty("user.dir") + "/res";
 
+        File file = new File(filePath);
+        System.out.println(file.getAbsolutePath());
+
+        FileOutputStream fileOut;
+
+        fileOut = new FileOutputStream(filePath + "/test.ser");
+        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+
+        out.writeObject(leiloes);
+
+        out.close();
+        fileOut.close();
+
+    }
+
+    public void leLeiloes() throws IOException, ClassNotFoundException, ClassNotFoundException {
+
+        String filePath = System.getProperty("user.dir") + "/res";
+        File file = new File(filePath);
+        System.out.println(file.getAbsolutePath());
+
+        FileInputStream fileIn = new FileInputStream(filePath + "/test.ser");
+        ObjectInputStream in = new ObjectInputStream(fileIn);
+
+        LojaDeLeiloes l;
+        l = (LojaDeLeiloes) in.readObject();
+
+        System.out.println("LEILAO = " + l.getLeiloes().get(0).getNome());
+        
+        in.close();
+        
+       fileIn.close();
+       
+       leiloes = l;
+       atualizaTabela();
     }
 
 }
