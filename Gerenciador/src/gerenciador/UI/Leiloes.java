@@ -8,6 +8,7 @@ import gerenciador.Exceptions.PrecoInvalido;
 import gerenciador.Exceptions.PrecoNaoNumerico;
 import gerenciador.Exceptions.ValorMenorQueMaiorLance;
 import gerenciador.Herancas.Animal;
+import gerenciador.Herancas.Pessoa;
 import gerenciador.Interfaces.ObjetoVenda;
 import gerenciador.LojaDeLeiloes;
 import gerenciador.Model.Lance;
@@ -34,14 +35,18 @@ import javax.swing.table.DefaultTableModel;
 
 public class Leiloes extends javax.swing.JFrame {
 
-    public Leiloes() {
+    
+    private Pessoa user;
+    
+    public Leiloes(Pessoa user) {
         initComponents();
         try {
             leLeiloes();
         } catch (Exception ex) {
-            System.out.println("ALGO DE ERRADO");
+            System.out.println("DataBase not found");
             //ex.printStackTrace();
         }
+        this.user = user;
     }
 
     private static final String TAG = "Leiloes";

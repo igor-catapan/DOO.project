@@ -2,6 +2,9 @@
 
 package gerenciador.UI;
 
+import gerenciador.Herancas.Pessoa;
+import gerenciador.Model.Comprador;
+import gerenciador.Model.Leiloeiro;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
@@ -144,17 +147,18 @@ public class Login extends javax.swing.JFrame {
         String nome = tfLoginNome.getText();
         boolean comprador = rbLoginComprador.isSelected();
         boolean leiloeiro = rbLoginLeiloeiro.isSelected();
-        new Leiloes().setVisible(true);
+        //new Leiloes().setVisible(true);
         this.setVisible(false);
         if(true)
             return;
         
         if (leiloeiro)
-            new Leiloes().setVisible(true);
+            new Leiloes((Pessoa) new Leiloeiro(nome)).setVisible(true);
         else if (comprador)
-            new Leiloes().setVisible(true);
+            new Leiloes((Pessoa) new Comprador(nome, 666f)).setVisible(true);
         else
-            JOptionPane.showMessageDialog(null, "Selecione se você é leiloeiro ou comprador", "ErroCaixaNaoSelecionada", JOptionPane.ERROR_MESSAGE);
+            new Leiloes((Pessoa) new Comprador("EUZINHO", 666f)).setVisible(true);
+            //JOptionPane.showMessageDialog(null, "Selecione se você é leiloeiro ou comprador", "ErroCaixaNaoSelecionada", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jbLoginEntrarActionPerformed
 
  

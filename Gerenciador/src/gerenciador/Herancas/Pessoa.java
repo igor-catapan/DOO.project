@@ -6,6 +6,7 @@
 package gerenciador.Herancas;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  *
@@ -14,14 +15,11 @@ import java.io.Serializable;
 abstract public class Pessoa implements Serializable{
     
     private String nome;
-    private int idade;
-    
-    private double dinheiro;
 
-    public Pessoa(String nome, int idade, double dinheiro) {
+
+    public Pessoa(String nome) {
         this.nome = nome;
-        this.idade = idade;
-        this.dinheiro = dinheiro;
+       
     }
 
     public String getNome() {
@@ -32,20 +30,24 @@ abstract public class Pessoa implements Serializable{
         this.nome = nome;
     }
 
-    public int getIdade() {
-        return idade;
-    }
+   
 
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-
-    public double getDinheiro() {
-        return dinheiro;
-    }
-
-    public void setDinheiro(double dinheiro) {
-        this.dinheiro = dinheiro;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pessoa other = (Pessoa) obj;
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        return true;
     }
     
     

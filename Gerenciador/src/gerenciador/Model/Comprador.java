@@ -14,8 +14,19 @@ import java.io.Serializable;
  */
 public class Comprador extends Pessoa  {
 
-    public Comprador(String nome, int idade, double dinheiro) {
-        super(nome, idade, dinheiro);
+    
+    private float dinheiro;
+    
+    public Comprador(String nome) {
+        super(nome);
+        this.dinheiro = 666.0f;
+        
+    }
+    
+    public Comprador(String nome, float dinheiro) {
+        super(nome);
+        this.dinheiro = dinheiro;
+        
     }
 
   

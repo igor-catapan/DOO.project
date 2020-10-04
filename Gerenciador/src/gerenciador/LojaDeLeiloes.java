@@ -5,6 +5,7 @@
  */
 package gerenciador;
 
+import gerenciador.Exceptions.LeilaoInvalidoParaDeletar;
 import gerenciador.Exceptions.IdadeInvalida;
 import gerenciador.Exceptions.PrecoNaoNumerico;
 import gerenciador.Exceptions.PrecoInvalido;
@@ -44,11 +45,11 @@ public class LojaDeLeiloes implements Serializable {
 
     }
 
-    public void removeLeilao(int indice) throws Exception {
+    public void removeLeilao(int indice) throws LeilaoInvalidoParaDeletar {
         //TODO REFATORAR E CRIAR EXCEPTION
         validaIndice(indice);
         if(leiloes.get(indice).getEstado() == "Ativo")
-            throw new Exception("Nao pode deletar Leilao ativo");
+            throw new LeilaoInvalidoParaDeletar("Nao pode deletar Leilao ativo");
         
         leiloes.remove(indice);
 

@@ -3,23 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gerenciador.Model;
-
-import gerenciador.Herancas.Pessoa;
-import java.io.Serializable;
+package gerenciador.Exceptions;
 
 /**
  *
  * @author PICHAU
  */
-public class Leiloeiro extends Pessoa   {
+public class LeilaoInvalidoParaDeletar extends Exception {
 
-    public Leiloeiro(String nome) {
-        super(nome);
+    public LeilaoInvalidoParaDeletar(String nao_pode_deletar_Leilao_ativo) {
     }
-
- 
-    
-    
     
 }
