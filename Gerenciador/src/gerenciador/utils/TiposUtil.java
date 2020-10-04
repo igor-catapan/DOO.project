@@ -17,7 +17,7 @@ public class TiposUtil {
     public static List<String> getTipos(){
         LinkedList lista = new LinkedList<String>();
         lista.add("Animais");        
-        lista.add("Carros");
+        lista.add("Veiculos");
         
         
         
@@ -25,6 +25,28 @@ public class TiposUtil {
         return lista;
         
     }
-    
+     public static List<String> getTiposDeVeiculos(){
+        LinkedList lista = new LinkedList<String>();
+        lista.add("Classico");        
+        
+        
+        
+        
+        
+        return lista;
+        
+    }
+     
+       public static List<String> getTiposDeAnimais(){
+        LinkedList lista = new LinkedList<String>();
+        lista.add("Boi");        
+        lista.add("Ovelha");
+        
+        
+        
+        
+        return lista;
+        
+    }
     
 }

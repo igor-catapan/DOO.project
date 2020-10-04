@@ -20,5 +20,8 @@ public interface ObjetoVenda {
     
     public int getIdade();
     
+    public String getSubTIpo();
+    
+    public String getDescricao();
     
 }

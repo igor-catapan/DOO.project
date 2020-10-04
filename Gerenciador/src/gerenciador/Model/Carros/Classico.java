@@ -3,32 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gerenciador.Model.Animais;
+package gerenciador.Model.Carros;
 
-import gerenciador.Herancas.Animal;
+import gerenciador.Herancas.Veiculo;
 import gerenciador.Interfaces.ObjetoVenda;
 
 /**
  *
  * @author PICHAU
  */
-public class Boi extends Animal implements ObjetoVenda {
+public class Classico extends Veiculo implements ObjetoVenda {
 
-    
-    
-    
-    
-    public static Boi criaBoi(double preco, String nome, int idade, String descricao){
-        Boi boi = new Boi();
-        boi.valor = preco;
-        boi.nome = nome;
-        boi.idade = idade;
-        boi.descricao = descricao;
+  
+
+    public static Classico criaClassico(double preco, String nome, int idade, String descricao) {
+        Classico classico = new Classico();
+        classico.valor = preco;
+        classico.nome = nome;
+        classico.idade = idade;
+        classico.descricao = descricao;
         
-        return boi;
+        return classico;
     }
-    
-    
+
+        
+    private String subtipo = "Classico";
+   
     
     @Override
     public String getNome() {
@@ -40,7 +40,6 @@ public class Boi extends Animal implements ObjetoVenda {
         return tipo;
     }
 
- 
     @Override
     public Double getValor() {
         return valor;
@@ -48,25 +47,16 @@ public class Boi extends Animal implements ObjetoVenda {
 
     @Override
     public int getIdade() {
-        return idade;
+       return idade;
     }
     
-    public void setValorInicial(double valor){
-        this.valor = valor;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     @Override
     public String getSubTIpo() {
-        return "Boi";
+        return subtipo;
     }
 
     @Override
     public String getDescricao() {
         return descricao;
     }
-
 }

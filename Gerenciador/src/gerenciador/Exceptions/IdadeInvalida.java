@@ -3,19 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gerenciador.Herancas;
+package gerenciador.Exceptions;
 
 /**
  *
  * @author PICHAU
  */
-public abstract class Animal{
-    
-  
-    protected String nome;
-    protected String tipo = "Animal";
-    protected double valor;
-    protected String descricao;
-    protected int idade;
+public class IdadeInvalida extends Exception {
+
+    public IdadeInvalida(String msg) {
+        super(msg);
+    }
     
 }

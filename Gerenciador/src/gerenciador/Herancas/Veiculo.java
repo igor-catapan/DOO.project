@@ -11,6 +11,11 @@ package gerenciador.Herancas;
  */
 public abstract class Veiculo {
     
+    protected String nome;
+    protected String tipo = "Veiculo";
+    protected double valor;
+    protected String descricao;
+    protected int idade;
     
     
     

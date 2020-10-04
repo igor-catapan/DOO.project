@@ -69,7 +69,7 @@ public class Leilao {
     }
 
     public double getValorMaisAlto() {
-        return valorMaisAlto;
+        return Math.max(valorMaisAlto, objeto.getValor());
     }
     
      public List<Lance> getTresMaioresLances(){
@@ -82,6 +82,10 @@ public class Leilao {
 
     public int getIdade() {
         return objeto.getIdade();
+    }
+
+    public Object getTipo() {
+        return objeto.getTipo();
     }
      
     

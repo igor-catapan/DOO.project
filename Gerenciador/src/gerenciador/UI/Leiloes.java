@@ -1,7 +1,11 @@
 package gerenciador.UI;
 
+import gerenciador.Exceptions.IdadeInvalida;
 import gerenciador.Exceptions.LeilaoNaoEncontrado;
 import gerenciador.Exceptions.LeilaoNaoSelecionadoParaVisualizar;
+import gerenciador.Exceptions.NomeInvalido;
+import gerenciador.Exceptions.PrecoInvalido;
+import gerenciador.Exceptions.PrecoNaoENumero;
 import gerenciador.Exceptions.ValorMenorQueMaiorLance;
 import gerenciador.Herancas.Animal;
 import gerenciador.Interfaces.ObjetoVenda;
@@ -11,6 +15,7 @@ import gerenciador.Model.Leilao;
 import gerenciador.Model.Animais.Boi;
 import gerenciador.Model.Comprador;
 import gerenciador.MyLogger;
+import static gerenciador.utils.JOptionsPaneUtil.showErrorMessage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -50,11 +55,11 @@ public class Leiloes extends javax.swing.JFrame{
 
             },
             new String [] {
-                "Nome", "Tipo", "Preco", "Idade"
+                "Nome", "Tipo", "Preco"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -164,53 +169,13 @@ public class Leiloes extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbLeiloesAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLeiloesAdicionarMouseClicked
-        //TODO NA VERDADE AQUI ABRE OUTRA TELA que recebe a lista com leiloes para adicionar
+       
         
-//        String nome = tfLeilaoNomeTesteLista.getText();
-//        String precoStr = tfLeilaoPrecoTesteLista.getText();
-        
-        
-        new CriaLeilao(this).setVisible(true);
-//         DefaultTableModel modelo = (DefaultTableModel) tbLeilaoLeiloes.getModel();
-//            modelo.setNumRows(0);
-//
-//            for (Leilao cont : leiloes.getLeiloes()) {
-//                modelo.addRow(new Object[]{
-//                    cont.getNome(),
-//                    "TODO",
-//                    cont.getValorMaisAlto(),});
-//            }
+        new CriaLeilao(this).setVisible(true);//    
             setVisible(false);
         return;
         
-//        double preco = Double.parseDouble(precoStr);
-//
-//        Boi boi = new Boi();
-//
-//        boi.setValorInicial(preco);
-//        boi.setNome(nome);
-//
-//        Leilao leilao = new Leilao((ObjetoVenda) boi);
-//
-//        Lance lance = new Lance(new Comprador("robert", 37, 42000), boi.getValor());
-//
-//        try {
-//            MyLogger.info(TAG, "Fazendo lance ");
-//            leilao.proposta(lance);
-//            leiloes.adicionaLeilao(leilao);
-//
-//            DefaultTableModel modelo = (DefaultTableModel) tbLeilaoLeiloes.getModel();
-//            modelo.setNumRows(0);
-//
-//            for (Leilao cont : leiloes.getLeiloes()) {
-//                modelo.addRow(new Object[]{
-//                    cont.getNome(),
-//                    "TODO",
-//                    cont.getValorMaisAlto(),});
-//            }
-//        } catch (ValorMenorQueMaiorLance ex) {
-//            MyLogger.debug(TAG, "Valor Invalido: " + ex.getMessage());
-//        }
+//      
 
 
     }//GEN-LAST:event_jbLeiloesAdicionarMouseClicked
@@ -236,7 +201,7 @@ public class Leiloes extends javax.swing.JFrame{
         try {
             Visualizar();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "ErroCaixaNaoSelecionada", JOptionPane.ERROR_MESSAGE);
+            showErrorMessage(e.getMessage(), "Campos invalidos!");
         }
     }//GEN-LAST:event_jbLeiloesDarLanceMouseClicked
 
@@ -261,7 +226,7 @@ public class Leiloes extends javax.swing.JFrame{
 
     private void finalizaLeilao() {
         int leilaoIndex = tbLeilaoLeiloes.getSelectedRow();
-        leiloes.removeLeilao(leilaoIndex);
+        leiloes.finalizaLeilao(leilaoIndex);
         
         
         DefaultTableModel modelo = (DefaultTableModel) tbLeilaoLeiloes.getModel();
@@ -275,7 +240,7 @@ public class Leiloes extends javax.swing.JFrame{
         for (Leilao cont : leiloes.getLeiloes()) {
                 modelo.addRow(new Object[]{
                     cont.getNome(),
-                    "TODO",
+                    cont.getTipo(),
                     cont.getValorMaisAlto(),
                 cont.getIdade()});
             }
@@ -284,6 +249,10 @@ public class Leiloes extends javax.swing.JFrame{
     void adicionaLeilao(Leilao leilao) {
         leiloes.adicionaLeilao(leilao);
         atualizaTabela();
+    }
+
+    public Leilao adicionaLeilao(String precoStr, String nome, int idade, String tipo, String subTipo, String descricao) throws PrecoInvalido, NomeInvalido, IdadeInvalida, PrecoNaoENumero {
+        return leiloes.adicionaLeilao(precoStr, nome, idade, tipo, subTipo, descricao);
     }
 
 }
