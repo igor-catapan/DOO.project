@@ -28,7 +28,7 @@ import java.util.List;
 public class LojaDeLeiloes implements Serializable {
 
     private ArrayList<Leilao> leiloes = new ArrayList<>();
-    private ArrayList<Leilao> finalizados = new ArrayList<>();
+    
 
     public void adicionaLeilao(Leilao leilao) {
         leiloes.add(leilao);
@@ -38,7 +38,9 @@ public class LojaDeLeiloes implements Serializable {
     public void finalizaLeilao(int indice) {
         validaIndice(indice);
 
-        finalizados.add(leiloes.remove(indice));
+        Leilao leilao = leiloes.get(indice);
+        leilao.setEstado("Finalizado");
+       
 
     }
 

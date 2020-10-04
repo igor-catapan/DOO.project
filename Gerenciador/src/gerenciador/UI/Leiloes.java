@@ -69,11 +69,11 @@ public class Leiloes extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Tipo", "Preco"
+                "Nome", "Tipo", "Preco", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -240,8 +240,7 @@ public class Leiloes extends javax.swing.JFrame {
         int leilaoIndex = tbLeilaoLeiloes.getSelectedRow();
         leiloes.finalizaLeilao(leilaoIndex);
 
-        DefaultTableModel modelo = (DefaultTableModel) tbLeilaoLeiloes.getModel();
-        modelo.removeRow(leilaoIndex);
+        atualizaTabela();
     }
 
     public void atualizaTabela() {
@@ -257,8 +256,8 @@ public class Leiloes extends javax.swing.JFrame {
             modelo.addRow(new Object[]{
                 cont.getNome(),
                 cont.getTipo(),
-                cont.getValorMaisAlto(),
-                cont.getIdade()});
+                cont.getValorMaisAlto(),                
+                cont.getEstado()});
         }
     }
 

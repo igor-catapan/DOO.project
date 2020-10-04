@@ -22,6 +22,8 @@ public class Leilao implements Serializable {
     
     private double valorMaisAlto = 0;
     
+    private String estado = "Ativo";
+    
     private ObjetoVenda objeto;
 
     public Leilao(ObjetoVenda objeto) {
@@ -87,6 +89,14 @@ public class Leilao implements Serializable {
 
     public Object getTipo() {
         return objeto.getTipo();
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
+    public String getEstado() {
+        return estado;
     }
      
     
