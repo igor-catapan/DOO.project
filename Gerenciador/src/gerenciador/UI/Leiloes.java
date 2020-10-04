@@ -90,6 +90,11 @@ public class Leiloes extends javax.swing.JFrame {
         });
 
         jbLeiloesDeletar.setText("Deletar");
+        jbLeiloesDeletar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbLeiloesDeletarMouseClicked(evt);
+            }
+        });
 
         jbLeiloesFinalizar.setText("Finalizar");
         jbLeiloesFinalizar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -216,6 +221,17 @@ public class Leiloes extends javax.swing.JFrame {
             showErrorMessage(e.getMessage(), "Campos invalidos!");
         }
     }//GEN-LAST:event_jbLeiloesDarLanceMouseClicked
+
+    private void jbLeiloesDeletarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLeiloesDeletarMouseClicked
+        try{
+            leiloes.removeLeilao(tbLeilaoLeiloes.getSelectedRow());            
+            atualizaTabela();
+            
+        }catch(Exception e){
+            showErrorMessage(e.getMessage(), "Erro deletar!");
+        }
+       
+    }//GEN-LAST:event_jbLeiloesDeletarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
