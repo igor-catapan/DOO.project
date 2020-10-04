@@ -15,7 +15,9 @@ import gerenciador.Interfaces.ObjetoVenda;
 import gerenciador.Model.Animais.Boi;
 import gerenciador.Model.Carros.Classico;
 import gerenciador.Model.Leilao;
+import static gerenciador.utils.TiposUtil.criaObjeto;
 import java.beans.PropertyChangeEvent;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,7 @@ import java.util.List;
  *
  * @author PICHAU
  */
-public class LojaDeLeiloes {
+public class LojaDeLeiloes implements Serializable {
 
     private ArrayList<Leilao> leiloes = new ArrayList<>();
     private ArrayList<Leilao> finalizados = new ArrayList<>();
@@ -87,7 +89,7 @@ public class LojaDeLeiloes {
         if (nome.isBlank()) {
             throw new NomeInvalido("Por favor preencha o nome");
         }
-        System.out.println("idade: " + idade);
+        
         if (idade < 0) {
             throw new IdadeInvalida("Por favor coloque uma idade valida (> 0)");
         }
@@ -100,19 +102,6 @@ public class LojaDeLeiloes {
 
     }
 
-    private ObjetoVenda criaObjeto(double preco, String nome, int idade, String subTipo, String descricao) {
-
-        ObjetoVenda obj = null;
-
-        if (subTipo == "Boi") {
-            Boi boi = Boi.criaBoi(preco, nome, idade, descricao);
-            obj = boi;
-        } else if (subTipo == "Classico") {
-            Classico boi = Classico.criaClassico(preco, nome, idade, descricao);
-            obj = boi;
-        }
-
-        return obj;
-    }
+   
 
 }

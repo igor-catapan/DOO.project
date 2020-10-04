@@ -5,6 +5,10 @@
  */
 package gerenciador.utils;
 
+import gerenciador.Interfaces.ObjetoVenda;
+import gerenciador.Model.Animais.Boi;
+import gerenciador.Model.Animais.Ovelha;
+import gerenciador.Model.Carros.Classico;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,40 +17,53 @@ import java.util.List;
  * @author PICHAU
  */
 public class TiposUtil {
-    
-    public static List<String> getTipos(){
-        LinkedList lista = new LinkedList<String>();
-        lista.add("Animais");        
+
+    public static final String CLASSICO = "Classico";
+    public static final String OVELHA = "Ovelha";
+    public static final String BOI = "Boi";
+
+    public static List<String> getTipos() {
+        List<String> lista = new LinkedList<String>();
+        lista.add("Animais");
         lista.add("Veiculos");
-        
-        
-        
-        
+
         return lista;
-        
+
     }
-     public static List<String> getTiposDeVeiculos(){
-        LinkedList lista = new LinkedList<String>();
-        lista.add("Classico");        
-        
-        
-        
-        
-        
+
+    public static List<String> getTiposDeVeiculos() {
+        List<String> lista = new LinkedList<String>();
+        lista.add(CLASSICO);
+
         return lista;
-        
+
     }
-     
-       public static List<String> getTiposDeAnimais(){
-        LinkedList lista = new LinkedList<String>();
-        lista.add("Boi");        
-        lista.add("Ovelha");
-        
-        
-        
-        
+
+    public static List<String> getTiposDeAnimais() {
+        List<String> lista = new LinkedList<String>();
+        lista.add(BOI);
+        lista.add(OVELHA);
+
         return lista;
-        
+
     }
-    
+
+    public static ObjetoVenda criaObjeto(double preco, String nome, int idade, String subTipo, String descricao) {
+
+        ObjetoVenda obj = null;
+
+        if (subTipo == BOI) {
+            Boi boi = Boi.criaBoi(preco, nome, idade, descricao);
+            obj = boi;
+        } else if (subTipo == OVELHA) {
+            Ovelha ovelha = Ovelha.criaOvelha(preco, nome, idade, descricao);
+            obj = ovelha;
+        } else if (subTipo == CLASSICO) {
+            Classico boi = Classico.criaClassico(preco, nome, idade, descricao);
+            obj = boi;
+        }
+
+        return obj;
+    }
+
 }

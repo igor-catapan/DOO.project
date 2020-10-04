@@ -18,16 +18,17 @@ import gerenciador.MyLogger;
 import static gerenciador.utils.JOptionsPaneUtil.showErrorMessage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class Leiloes extends javax.swing.JFrame{
+public class Leiloes extends javax.swing.JFrame {
 
     public Leiloes() {
         initComponents();
-        
+        salva();
     }
 
     private static final String TAG = "Leiloes";
@@ -169,14 +170,12 @@ public class Leiloes extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbLeiloesAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLeiloesAdicionarMouseClicked
-       
-        
-        new CriaLeilao(this).setVisible(true);//    
-            setVisible(false);
-        return;
-        
-//      
 
+        new CriaLeilao(this).setVisible(true);//    
+        setVisible(false);
+        return;
+
+//      
 
     }//GEN-LAST:event_jbLeiloesAdicionarMouseClicked
 
@@ -185,15 +184,15 @@ public class Leiloes extends javax.swing.JFrame{
     }//GEN-LAST:event_jbLeiloesFinalizarActionPerformed
 
     private void jbLeiloesFinalizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLeiloesFinalizarMouseClicked
-       
-         try {
+
+        try {
             finalizaLeilao();
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "ErroCaixaNaoSelecionada", JOptionPane.ERROR_MESSAGE);
         }
-        
-        
+
+
     }//GEN-LAST:event_jbLeiloesFinalizarMouseClicked
 
     private void jbLeiloesDarLanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLeiloesDarLanceMouseClicked
@@ -227,23 +226,22 @@ public class Leiloes extends javax.swing.JFrame{
     private void finalizaLeilao() {
         int leilaoIndex = tbLeilaoLeiloes.getSelectedRow();
         leiloes.finalizaLeilao(leilaoIndex);
-        
-        
+
         DefaultTableModel modelo = (DefaultTableModel) tbLeilaoLeiloes.getModel();
         modelo.removeRow(leilaoIndex);
     }
 
     public void atualizaTabela() {
-        
+
         DefaultTableModel modelo = (DefaultTableModel) tbLeilaoLeiloes.getModel();
-            modelo.setNumRows(0);
+        modelo.setNumRows(0);
         for (Leilao cont : leiloes.getLeiloes()) {
-                modelo.addRow(new Object[]{
-                    cont.getNome(),
-                    cont.getTipo(),
-                    cont.getValorMaisAlto(),
+            modelo.addRow(new Object[]{
+                cont.getNome(),
+                cont.getTipo(),
+                cont.getValorMaisAlto(),
                 cont.getIdade()});
-            }
+        }
     }
 
     void adicionaLeilao(Leilao leilao) {
@@ -253,6 +251,13 @@ public class Leiloes extends javax.swing.JFrame{
 
     public Leilao adicionaLeilao(String precoStr, String nome, int idade, String tipo, String subTipo, String descricao) throws PrecoInvalido, NomeInvalido, IdadeInvalida, PrecoNaoENumero {
         return leiloes.adicionaLeilao(precoStr, nome, idade, tipo, subTipo, descricao);
+    }
+
+    public void salva() {
+        URL filePath = Class.class.getClassLoader().getResource("teste");
+
+        System.out.println(filePath.getPath());
+
     }
 
 }

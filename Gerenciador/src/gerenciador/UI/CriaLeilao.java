@@ -216,20 +216,24 @@ public class CriaLeilao extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
 
+//        spCriaLeilaoIdade.commitEdit();
+        
         String preco = tfCriaLeilaoPreco.getText();
         String nome = tfCriaLeilaoNome.getText();
+        
         int idade = (int) spCriaLeilaoIdade.getValue();
         String tipo = (String) cbCriaLeilaoTipo.getSelectedItem();
         String subTipo = (String) cbCriaLeilaSuboTipo.getSelectedItem();
         String descricao = jTextArea1.getText();
 
-        try{
-        Leilao leilao = leiloes.adicionaLeilao(preco, nome, idade, tipo, subTipo, descricao); 
-        MyLogger.info(TAG, "Adicionando leilao: " + leilao.getNome()); 
-        leiloes.atualizaTabela();
-        close();
         
-        }catch(Exception e){
+        try {
+            Leilao leilao = leiloes.adicionaLeilao(preco, nome, idade, tipo, subTipo, descricao);
+            MyLogger.info(TAG, "Adicionando leilao: " + leilao.getNome());
+            leiloes.atualizaTabela();
+            close();
+
+        } catch (Exception e) {
             showErrorMessage(e.getMessage(), "Valores invalidos!");
         }
 
@@ -279,7 +283,6 @@ public class CriaLeilao extends javax.swing.JFrame {
                 if (selectedType == null) {
                     return;
                 }
-                //TODO MUDAR OS SUBTIPOS
                 MyLogger.debug(TAG, "tipo selecionado: " + selectedType);
                 mudaSubTipos(selectedType);
 

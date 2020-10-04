@@ -7,6 +7,8 @@ package gerenciador.Model.Animais;
 
 import gerenciador.Herancas.Animal;
 import gerenciador.Interfaces.ObjetoVenda;
+import gerenciador.utils.TiposUtil;
+import java.io.Serializable;
 
 /**
  *
@@ -61,7 +63,7 @@ public class Boi extends Animal implements ObjetoVenda {
 
     @Override
     public String getSubTIpo() {
-        return "Boi";
+        return TiposUtil.BOI;
     }
 
     @Override

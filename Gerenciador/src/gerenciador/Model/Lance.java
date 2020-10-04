@@ -5,11 +5,13 @@
  */
 package gerenciador.Model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author PICHAU
  */
-public class Lance implements Comparable<Lance>{
+public class Lance implements Comparable<Lance>, Serializable{
     
     private Comprador user;
     private Double valor;

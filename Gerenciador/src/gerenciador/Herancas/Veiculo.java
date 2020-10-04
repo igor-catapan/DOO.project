@@ -5,11 +5,13 @@
  */
 package gerenciador.Herancas;
 
+import java.io.Serializable;
+
 /**
  *
  * @author PICHAU
  */
-public abstract class Veiculo {
+public abstract class Veiculo implements Serializable{
     
     protected String nome;
     protected String tipo = "Veiculo";

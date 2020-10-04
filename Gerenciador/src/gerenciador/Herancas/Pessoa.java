@@ -5,11 +5,13 @@
  */
 package gerenciador.Herancas;
 
+import java.io.Serializable;
+
 /**
  *
  * @author PICHAU
  */
-abstract public class Pessoa {
+abstract public class Pessoa implements Serializable{
     
     private String nome;
     private int idade;

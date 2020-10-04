@@ -7,6 +7,7 @@ package gerenciador.Model;
 
 import gerenciador.Exceptions.ValorMenorQueMaiorLance;
 import gerenciador.Interfaces.ObjetoVenda;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  *
  * @author PICHAU
  */
-public class Leilao {
+public class Leilao implements Serializable {
 
     private List<Lance> lances;
     

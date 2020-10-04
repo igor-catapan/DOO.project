@@ -6,12 +6,13 @@
 package gerenciador.Model;
 
 import gerenciador.Herancas.Pessoa;
+import java.io.Serializable;
 
 /**
  *
  * @author PICHAU
  */
-public class Comprador extends Pessoa{
+public class Comprador extends Pessoa  {
 
     public Comprador(String nome, int idade, double dinheiro) {
         super(nome, idade, dinheiro);

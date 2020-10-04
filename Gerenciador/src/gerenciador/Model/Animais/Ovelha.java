@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gerenciador.Model.Carros;
+package gerenciador.Model.Animais;
 
-import gerenciador.Herancas.Veiculo;
+import gerenciador.Herancas.Animal;
 import gerenciador.Interfaces.ObjetoVenda;
 import gerenciador.utils.TiposUtil;
 import java.io.Serializable;
@@ -14,23 +14,22 @@ import java.io.Serializable;
  *
  * @author PICHAU
  */
-public class Classico extends Veiculo implements ObjetoVenda  {
-
-  
-
-    public static Classico criaClassico(double preco, String nome, int idade, String descricao) {
-        Classico classico = new Classico();
-        classico.valor = preco;
-        classico.nome = nome;
-        classico.idade = idade;
-        classico.descricao = descricao;
-        
-        return classico;
-    }
-
-        
+public class Ovelha extends Animal implements ObjetoVenda {
     
-   
+      
+    
+    
+    public static Ovelha criaOvelha(double preco, String nome, int idade, String descricao){
+        Ovelha ovelha = new Ovelha();
+        ovelha.valor = preco;
+        ovelha.nome = nome;
+        ovelha.idade = idade;
+        ovelha.descricao = descricao;
+        
+        return ovelha;
+    }
+    
+    
     
     @Override
     public String getNome() {
@@ -42,6 +41,7 @@ public class Classico extends Veiculo implements ObjetoVenda  {
         return tipo;
     }
 
+ 
     @Override
     public Double getValor() {
         return valor;
@@ -49,16 +49,26 @@ public class Classico extends Veiculo implements ObjetoVenda  {
 
     @Override
     public int getIdade() {
-       return idade;
+        return idade;
     }
     
+    public void setValorInicial(double valor){
+        this.valor = valor;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     @Override
     public String getSubTIpo() {
-        return TiposUtil.CLASSICO;
+        return TiposUtil.OVELHA;
     }
 
     @Override
     public String getDescricao() {
         return descricao;
     }
+
+    
 }

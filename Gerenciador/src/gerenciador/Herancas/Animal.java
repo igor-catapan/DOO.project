@@ -5,11 +5,13 @@
  */
 package gerenciador.Herancas;
 
+import java.io.Serializable;
+
 /**
  *
  * @author PICHAU
  */
-public abstract class Animal{
+public abstract class Animal implements Serializable {
     
   
     protected String nome;
