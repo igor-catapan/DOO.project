@@ -5,7 +5,7 @@ import gerenciador.Exceptions.LeilaoNaoEncontrado;
 import gerenciador.Exceptions.LeilaoNaoSelecionadoParaVisualizar;
 import gerenciador.Exceptions.NomeInvalido;
 import gerenciador.Exceptions.PrecoInvalido;
-import gerenciador.Exceptions.PrecoNaoENumero;
+import gerenciador.Exceptions.PrecoNaoNumerico;
 import gerenciador.Exceptions.ValorMenorQueMaiorLance;
 import gerenciador.Herancas.Animal;
 import gerenciador.Interfaces.ObjetoVenda;
@@ -249,7 +249,8 @@ public class Leiloes extends javax.swing.JFrame {
     private void Visualizar() throws LeilaoNaoEncontrado, LeilaoNaoSelecionadoParaVisualizar {
         int leilaoIndex = tbLeilaoLeiloes.getSelectedRow();
         Leilao leilao = leiloes.getLeilao(leilaoIndex);
-        new VisualizaLeilao(leilao).setVisible(true);
+        new VisualizaLeilao(leilao, this).setVisible(true);
+        setVisible(false);
     }
 
     private void finalizaLeilao() {
@@ -283,7 +284,7 @@ public class Leiloes extends javax.swing.JFrame {
 
     }
 
-    public Leilao adicionaLeilao(String precoStr, String nome, int idade, String tipo, String subTipo, String descricao) throws PrecoInvalido, NomeInvalido, IdadeInvalida, PrecoNaoENumero {
+    public Leilao adicionaLeilao(String precoStr, String nome, int idade, String tipo, String subTipo, String descricao) throws PrecoInvalido, NomeInvalido, IdadeInvalida, PrecoNaoNumerico {
         return leiloes.adicionaLeilao(precoStr, nome, idade, tipo, subTipo, descricao);
     }
 

@@ -9,9 +9,9 @@ package gerenciador.Exceptions;
  *
  * @author PICHAU
  */
-public class PrecoNaoENumero extends Exception {
+public class PrecoNaoNumerico extends Exception {
 
-    public PrecoNaoENumero(String msg) {
+    public PrecoNaoNumerico(String msg) {
         super(msg);
     }
     
