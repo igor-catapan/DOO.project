@@ -40,7 +40,7 @@ public class Leiloes extends javax.swing.JFrame {
             leLeiloes();
         } catch (Exception ex) {
             System.out.println("ALGO DE ERRADO");
-            ex.printStackTrace();
+            //ex.printStackTrace();
         }
     }
 

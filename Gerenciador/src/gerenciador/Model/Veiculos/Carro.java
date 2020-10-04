@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gerenciador.Model.Carros;
+package gerenciador.Model.Veiculos;
 
 import gerenciador.Herancas.Veiculo;
 import gerenciador.Interfaces.ObjetoVenda;
@@ -14,18 +14,18 @@ import java.io.Serializable;
  *
  * @author PICHAU
  */
-public class Classico extends Veiculo implements ObjetoVenda  {
+public class Carro extends Veiculo implements ObjetoVenda  {
 
   
 
-    public static Classico criaClassico(double preco, String nome, int idade, String descricao) {
-        Classico classico = new Classico();
-        classico.valor = preco;
-        classico.nome = nome;
-        classico.idade = idade;
-        classico.descricao = descricao;
+    public static Carro criaCarro(double preco, String nome, int idade, String Veicolos) {
+        Carro carro = new Carro();
+        carro.valor = preco;
+        carro.nome = nome;
+        carro.idade = idade;
+        carro.descricao = Veicolos;
         
-        return classico;
+        return carro;
     }
 
         
@@ -54,7 +54,7 @@ public class Classico extends Veiculo implements ObjetoVenda  {
     
     @Override
     public String getSubTIpo() {
-        return TiposUtil.CLASSICO;
+        return TiposUtil.CARRO;
     }
 
     @Override

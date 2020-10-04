@@ -13,7 +13,7 @@ import gerenciador.Exceptions.LeilaoNaoEncontrado;
 import gerenciador.Exceptions.LeilaoNaoSelecionadoParaVisualizar;
 import gerenciador.Interfaces.ObjetoVenda;
 import gerenciador.Model.Animais.Boi;
-import gerenciador.Model.Carros.Classico;
+import gerenciador.Model.Veiculos.Carro;
 import gerenciador.Model.Leilao;
 import static gerenciador.utils.TiposUtil.criaObjeto;
 import java.beans.PropertyChangeEvent;

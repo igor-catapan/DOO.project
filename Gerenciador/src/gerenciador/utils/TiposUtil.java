@@ -8,7 +8,9 @@ package gerenciador.utils;
 import gerenciador.Interfaces.ObjetoVenda;
 import gerenciador.Model.Animais.Boi;
 import gerenciador.Model.Animais.Ovelha;
-import gerenciador.Model.Carros.Classico;
+import gerenciador.Model.Veiculos.Carro;
+import gerenciador.Model.Veiculos.Moto;
+import gerenciador.Model.Veiculos.Trator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,12 +19,17 @@ import java.util.List;
  * @author PICHAU
  */
 public class TiposUtil {
-
-    public static final String CLASSICO = "Classico";
-    public static final String OVELHA = "Ovelha";
-    public static final String BOI = "Boi";
+    //TIPO
     public static final String VEICULOS = "Veiculos";
     public static final String ANIMAIS = "Animais";
+    
+    //SUBTIPO
+    public static final String MOTO = "Motos";
+    public static final String TRATOR = "Trator";
+    public static final String CARRO = "Carros";
+    public static final String OVELHA = "Ovelha";
+    public static final String BOI = "Boi";
+    
     
 
     public static List<String> getTipos() {
@@ -37,7 +44,9 @@ public class TiposUtil {
 
     public static List<String> getTiposDeVeiculos() {
         List<String> lista = new LinkedList<String>();
-        lista.add(CLASSICO);
+        lista.add(CARRO);
+        lista.add(TRATOR);
+        lista.add(MOTO);
 
         return lista;
 
@@ -62,11 +71,16 @@ public class TiposUtil {
         } else if (subTipo == OVELHA) {
             Ovelha ovelha = Ovelha.criaOvelha(preco, nome, idade, descricao);
             obj = ovelha;
-        } else if (subTipo == CLASSICO) {
-            Classico boi = Classico.criaClassico(preco, nome, idade, descricao);
-            obj = boi;
+        } else if (subTipo == CARRO) {
+            Carro carro = Carro.criaCarro(preco, nome, idade, descricao);
+            obj = carro;
+        } else if (subTipo ==  TRATOR){
+            Trator trator = Trator.criaTrator(preco, nome, idade, descricao);
+            obj = trator;
+        } else if (subTipo ==  MOTO){
+            Moto moto = Moto.criaMoto(preco, nome, idade, descricao);
+            obj = moto;
         }
-
         return obj;
     }
 

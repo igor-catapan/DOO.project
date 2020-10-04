@@ -235,6 +235,7 @@ public class CriaLeilao extends javax.swing.JFrame {
 
         } catch (Exception e) {
             showErrorMessage(e.getMessage(), "Valores invalidos!");
+            e.printStackTrace();
         }
 
 
