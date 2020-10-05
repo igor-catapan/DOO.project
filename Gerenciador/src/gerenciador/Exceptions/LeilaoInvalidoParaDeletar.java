@@ -11,7 +11,8 @@ package gerenciador.Exceptions;
  */
 public class LeilaoInvalidoParaDeletar extends Exception {
 
-    public LeilaoInvalidoParaDeletar(String nao_pode_deletar_Leilao_ativo) {
+    public LeilaoInvalidoParaDeletar(String msg) {
+        super(msg);
     }
     
 }

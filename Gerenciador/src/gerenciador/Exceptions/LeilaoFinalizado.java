@@ -5,10 +5,14 @@
  */
 package gerenciador.Exceptions;
 
-public class LeilaoNaoSelecionadoParaVisualizar extends IndexOutOfBoundsException {
+/**
+ *
+ * @author PICHAU
+ */
+public class LeilaoFinalizado extends Exception {
 
-    public LeilaoNaoSelecionadoParaVisualizar(String message) {
-        super(message);
+    public LeilaoFinalizado(String msg) {
+        super(msg);
     }
-
+    
 }

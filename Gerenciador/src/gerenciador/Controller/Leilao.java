@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gerenciador.Model;
+package gerenciador.Controller;
 
 import gerenciador.Exceptions.SemDinheiroParaLance;
 import gerenciador.Exceptions.ValorMenorQueMaiorLance;
 import gerenciador.Interfaces.ObjetoVenda;
+import gerenciador.Model.Comprador;
+import gerenciador.Model.Lance;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,11 +21,14 @@ import java.util.List;
  */
 public class Leilao implements Serializable {
 
+    public static final String ATIVO = "Ativo";
+    public static final String FINALIZADO = "Finalizado";
+    
     private List<Lance> lances;
     
     private double valorMaisAlto = 0;
     
-    private String estado = "Ativo";
+    private String estado = ATIVO;
     
     private ObjetoVenda objeto;
 
@@ -58,7 +63,7 @@ public class Leilao implements Serializable {
         lance.getUser().podeDarLance(lance.getValor());      
         
         if (!lances.isEmpty()) {
-            if (lance.getValor() < lances.get(0).getValor()) {
+            if (lance.getValor() <= lances.get(0).getValor()) {
                 throw new ValorMenorQueMaiorLance("Novo lance tem que ser maior que o valor mais alto!");
             }
         }
@@ -82,8 +87,12 @@ public class Leilao implements Serializable {
         return objeto.getIdade();
     }
 
-    public Object getTipo() {
+    public String getTipo() {
         return objeto.getTipo();
+    }
+    
+    public String getSubtipo() {
+        return objeto.getSubTIpo();
     }
 
     public void setEstado(String estado) {
@@ -92,6 +101,14 @@ public class Leilao implements Serializable {
     
     public String getEstado() {
         return estado;
+    }
+
+    public String getDescricao() {
+        return objeto.getDescricao();
+    }
+
+    public int getQuantidadeDeLances() {
+        return lances.size();
     }
      
     

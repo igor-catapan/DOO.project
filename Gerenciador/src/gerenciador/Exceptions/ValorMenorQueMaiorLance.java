@@ -15,7 +15,5 @@ public class ValorMenorQueMaiorLance extends Exception {
         super(message);
     }
     
-     public ValorMenorQueMaiorLance() {
-       
-    }
+   
 }

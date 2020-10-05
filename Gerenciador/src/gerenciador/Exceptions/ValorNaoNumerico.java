@@ -11,7 +11,8 @@ package gerenciador.Exceptions;
  */
 public class ValorNaoNumerico extends Exception {
 
-    public ValorNaoNumerico(String por_favor_digite_algo) {
+    public ValorNaoNumerico(String msg) {
+        super(msg);
     }
     
 }

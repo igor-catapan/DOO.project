@@ -15,7 +15,7 @@ import gerenciador.Exceptions.LeilaoNaoSelecionadoParaVisualizar;
 import gerenciador.Interfaces.ObjetoVenda;
 import gerenciador.Model.Animais.Boi;
 import gerenciador.Model.Veiculos.Carro;
-import gerenciador.Model.Leilao;
+import gerenciador.Controller.Leilao;
 import static gerenciador.utils.TiposUtil.criaObjeto;
 import java.beans.PropertyChangeEvent;
 import java.io.Serializable;
@@ -40,7 +40,7 @@ public class LojaDeLeiloes implements Serializable {
         validaIndice(indice);
 
         Leilao leilao = leiloes.get(indice);
-        leilao.setEstado("Finalizado");
+        leilao.setEstado(Leilao.FINALIZADO);
        
 
     }
@@ -48,8 +48,10 @@ public class LojaDeLeiloes implements Serializable {
     public void removeLeilao(int indice) throws LeilaoInvalidoParaDeletar {
         
         validaIndice(indice);
-        if(leiloes.get(indice).getEstado() == "Ativo")
-            throw new LeilaoInvalidoParaDeletar("Nao pode deletar Leilao ativo");
+        Leilao leilao = leiloes.get(indice);
+        
+        if(leilao.getEstado() == Leilao.ATIVO && leilao.getQuantidadeDeLances() != 0)
+            throw new LeilaoInvalidoParaDeletar("Nao pode deletar Leilao ativo e com lances");
         
         leiloes.remove(indice);
 

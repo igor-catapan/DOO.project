@@ -11,9 +11,10 @@ import gerenciador.LojaDeLeiloes;
 import gerenciador.Model.Animais.Boi;
 import gerenciador.Model.Comprador;
 import gerenciador.Model.Lance;
-import gerenciador.Model.Leilao;
+import gerenciador.Controller.Leilao;
 import gerenciador.MyLogger;
 import gerenciador.utils.FrameUtils;
+import static gerenciador.utils.FrameUtils.setScreenPosition;
 import static gerenciador.utils.JOptionsPaneUtil.showErrorMessage;
 import gerenciador.utils.TiposUtil;
 import java.awt.event.ActionEvent;
@@ -43,6 +44,7 @@ public class CriaLeilao extends javax.swing.JFrame {
         FrameUtils.setClosingEvent(TAG, this, leiloes);
         setOnTypeChange();
         setItens(cbCriaLeilaoTipo, TiposUtil.getTipos());
+        setScreenPosition(this);
     }
 
     /**
@@ -235,7 +237,7 @@ public class CriaLeilao extends javax.swing.JFrame {
 
         } catch (Exception e) {
             showErrorMessage(e.getMessage(), "Valores invalidos!");
-            e.printStackTrace();
+            
         }
 
 

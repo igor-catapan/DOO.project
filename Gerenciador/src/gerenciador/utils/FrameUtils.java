@@ -7,6 +7,8 @@ package gerenciador.utils;
 
 import gerenciador.MyLogger;
 import gerenciador.UI.Leiloes;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 /**
@@ -14,8 +16,8 @@ import javax.swing.JFrame;
  * @author PICHAU
  */
 public class FrameUtils {
-    
-     public static void setClosingEvent(String TAG, JFrame frame, Leiloes leiloes) {
+
+    public static void setClosingEvent(String TAG, JFrame frame, Leiloes leiloes) {
 
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -27,6 +29,10 @@ public class FrameUtils {
             }
         });
     }
-    
-    
+
+    public static void setScreenPosition(JFrame frame) {
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
+    }
+
 }

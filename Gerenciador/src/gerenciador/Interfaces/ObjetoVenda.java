@@ -22,6 +22,7 @@ public interface ObjetoVenda {
     
     public String getSubTIpo();
     
-    public String getDescricao();
+    public String getDescricao();    
+    
     
 }

@@ -60,7 +60,11 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jlVizualizaLeilaoNome" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                          <Component id="lbVizualizaLeilaoNome" min="-2" pref="124" max="-2" attributes="0"/>
+                          <Component id="lbVisualizaLeilaoNome" min="-2" pref="124" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="lbVisualizaLeilaoEstado" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -78,23 +82,20 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jlVisualizaLeilao" min="-2" pref="33" max="-2" attributes="0"/>
-                                  <EmptySpace pref="16" max="32767" attributes="0"/>
-                                  <Component id="lbVisualizaLeilaoTipo" min="-2" pref="69" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lbVisualizaLeilaoTipo" min="-2" pref="55" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="asdasd" min="-2" pref="66" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="asdasd" alignment="0" min="-2" pref="66" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" pref="34" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbVisualizaLeilaoIdade" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbVisualizaLeilaoSubtipo" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
                       </Group>
@@ -110,14 +111,16 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jlVizualizaLeilaoNome" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="lbVizualizaLeilaoNome" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="lbVisualizaLeilaoNome" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbVisualizaLeilaoEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jlVisualizaLeilao" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                       <Component id="lbVisualizaLeilaoTipo" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbVisualizaLeilaoSubtipo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
@@ -128,7 +131,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbVisualizaLeilaoIdade" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -149,7 +152,7 @@
             <Property name="text" type="java.lang.String" value="Nome do item: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbVizualizaLeilaoNome">
+        <Component class="javax.swing.JLabel" name="lbVisualizaLeilaoNome">
           <Properties>
             <Property name="text" type="java.lang.String" value="Crf 230"/>
           </Properties>
@@ -219,7 +222,7 @@
             <Property name="text" type="java.lang.String" value="Subtipo:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="lbVisualizaLeilaoSubtipo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Moto"/>
           </Properties>
@@ -231,7 +234,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextArea" name="jTextArea1">
+            <Component class="javax.swing.JTextArea" name="taVisualizaLeilaoDescricao">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -257,9 +260,19 @@
             <Property name="text" type="java.lang.String" value="Idade:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel6">
+        <Component class="javax.swing.JLabel" name="lbVisualizaLeilaoIdade">
           <Properties>
             <Property name="text" type="java.lang.String" value="1.2 anos"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Estado:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbVisualizaLeilaoEstado">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Finalizado"/>
           </Properties>
         </Component>
       </SubComponents>

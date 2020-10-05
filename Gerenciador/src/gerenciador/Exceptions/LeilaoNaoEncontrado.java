@@ -14,9 +14,7 @@ public class LeilaoNaoEncontrado extends IndexOutOfBoundsException{
         super(message);
     }
     
-     public LeilaoNaoEncontrado() {
-         
-     }
+  
        
     
 }

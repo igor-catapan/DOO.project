@@ -33,11 +33,11 @@ public class Comprador extends Pessoa  {
 
     public void podeDarLance(double valor) throws SemDinheiroParaLance{
         if(valor > dinheiro)
-            throw new SemDinheiroParaLance("VOce nao tem dinheiro suficiente para fazer um lance");
+            throw new SemDinheiroParaLance("VOce nao tem dinheiro suficiente para fazer um lance (" + dinheiro + ")");
         
-        valor = valor - dinheiro;
+        dinheiro -= valor ;
         
-        showSuccessMessage("Lance feito com sucesso, saldo novo: " + valor, "Sucesso");
+        showSuccessMessage("Lance feito com sucesso, saldo novo: " + dinheiro, "Sucesso");
         
     }
 

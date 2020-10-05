@@ -5,6 +5,8 @@
  */
 package gerenciador.UI;
 
+import gerenciador.Exceptions.LeilaoFinalizado;
+import gerenciador.Exceptions.UsuarioInvalido;
 import gerenciador.Exceptions.SemDinheiroParaLance;
 import gerenciador.Exceptions.ValorNaoNumerico;
 import gerenciador.Exceptions.ValorInvalido;
@@ -12,10 +14,11 @@ import gerenciador.Exceptions.ValorMenorQueMaiorLance;
 import gerenciador.Herancas.Pessoa;
 import gerenciador.Model.Comprador;
 import gerenciador.Model.Lance;
-import gerenciador.Model.Leilao;
+import gerenciador.Controller.Leilao;
 import gerenciador.Model.Leiloeiro;
 import gerenciador.MyLogger;
 import gerenciador.utils.FrameUtils;
+import static gerenciador.utils.FrameUtils.setScreenPosition;
 import static gerenciador.utils.JOptionsPaneUtil.showErrorMessage;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -41,16 +44,19 @@ public class VisualizaLeilao extends javax.swing.JFrame {
         initComponents();
         this.leilao = leilao;
         this.user = user;
-        
+
         MyLogger.debug(TAG, leilao.getNome());
         atualizaTabela();
 
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         FrameUtils.setClosingEvent(TAG, this, leiloes);
-        
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setWrapStyleWord(true);
-        jTextArea1.setEditable(false);
+
+        taVisualizaLeilaoDescricao.setLineWrap(true);
+        taVisualizaLeilaoDescricao.setWrapStyleWord(true);
+        taVisualizaLeilaoDescricao.setEditable(false);
+        setScreenPosition(this);
+
+        preencherCampos();
 
     }
 
@@ -60,7 +66,7 @@ public class VisualizaLeilao extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jlVizualizaLeilaoNome = new javax.swing.JLabel();
-        lbVizualizaLeilaoNome = new javax.swing.JLabel();
+        lbVisualizaLeilaoNome = new javax.swing.JLabel();
         jlVisualizaLeilao = new javax.swing.JLabel();
         lbVisualizaLeilaoTipo = new javax.swing.JLabel();
         asdasd = new javax.swing.JLabel();
@@ -68,19 +74,21 @@ public class VisualizaLeilao extends javax.swing.JFrame {
         tbVisualizaLeilaoLances = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lbVisualizaLeilaoSubtipo = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        taVisualizaLeilaoDescricao = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lbVisualizaLeilaoIdade = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        lbVisualizaLeilaoEstado = new javax.swing.JLabel();
         btVisualizaLeilaoDarLance = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jlVizualizaLeilaoNome.setText("Nome do item: ");
 
-        lbVizualizaLeilaoNome.setText("Crf 230");
+        lbVisualizaLeilaoNome.setText("Crf 230");
 
         jlVisualizaLeilao.setText("Tipo:");
 
@@ -106,13 +114,13 @@ public class VisualizaLeilao extends javax.swing.JFrame {
 
         jLabel2.setText("Subtipo:");
 
-        jLabel3.setText("Moto");
+        lbVisualizaLeilaoSubtipo.setText("Moto");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Moto de trilha, semi-nova. Conservada, correia e \namortecedor novos");
-        jScrollPane2.setViewportView(jTextArea1);
+        taVisualizaLeilaoDescricao.setColumns(20);
+        taVisualizaLeilaoDescricao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        taVisualizaLeilaoDescricao.setRows(5);
+        taVisualizaLeilaoDescricao.setText("Moto de trilha, semi-nova. Conservada, correia e \namortecedor novos");
+        jScrollPane2.setViewportView(taVisualizaLeilaoDescricao);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -120,7 +128,11 @@ public class VisualizaLeilao extends javax.swing.JFrame {
 
         jLabel5.setText("Idade:");
 
-        jLabel6.setText("1.2 anos");
+        lbVisualizaLeilaoIdade.setText("1.2 anos");
+
+        jLabel3.setText("Estado:");
+
+        lbVisualizaLeilaoEstado.setText("Finalizado");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -133,7 +145,11 @@ public class VisualizaLeilao extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jlVizualizaLeilaoNome)
                         .addGap(11, 11, 11)
-                        .addComponent(lbVizualizaLeilaoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbVisualizaLeilaoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbVisualizaLeilaoEstado)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -147,19 +163,17 @@ public class VisualizaLeilao extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jlVisualizaLeilao, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                                .addComponent(lbVisualizaLeilaoTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(asdasd, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbVisualizaLeilaoTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(asdasd, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 34, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel3))
+                            .addComponent(lbVisualizaLeilaoIdade)
+                            .addComponent(lbVisualizaLeilaoSubtipo))
                         .addGap(148, 148, 148))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -170,13 +184,15 @@ public class VisualizaLeilao extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlVizualizaLeilaoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbVizualizaLeilaoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbVisualizaLeilaoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(lbVisualizaLeilaoEstado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlVisualizaLeilao, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbVisualizaLeilaoTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(lbVisualizaLeilaoSubtipo))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -185,7 +201,7 @@ public class VisualizaLeilao extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel6))))
+                            .addComponent(lbVisualizaLeilaoIdade))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -233,7 +249,7 @@ public class VisualizaLeilao extends javax.swing.JFrame {
             darLance();
 
         } catch (Exception e) {
-           showErrorMessage(e.getMessage(), "Erro Lance!");
+            showErrorMessage(e.getMessage(), "Erro ao Dar Lance!");
         }
     }//GEN-LAST:event_btVisualizaLeilaoDarLanceMouseClicked
 
@@ -249,21 +265,48 @@ public class VisualizaLeilao extends javax.swing.JFrame {
         }
     }
 
-    private void darLance() throws ValorInvalido, ValorNaoNumerico, ValorMenorQueMaiorLance, SemDinheiroParaLance {
-        
-        if(user instanceof Leiloeiro){
-            showErrorMessage("Leloeiro nao pode dar lance", "Problema ao dar lance");
+    private void darLance() throws ValorInvalido, ValorNaoNumerico, ValorMenorQueMaiorLance, SemDinheiroParaLance, UsuarioInvalido, LeilaoFinalizado {
+
+        if (user instanceof Leiloeiro) {
+            throw new UsuarioInvalido("Leloeiro nao pode dar lance");
+        }else if(leilao.getEstado() == Leilao.FINALIZADO)
+            throw new LeilaoFinalizado("Leilao finalizado, nao pode fazer mais lances!");
+
+       
+        String valorStr = JOptionPane.showInputDialog(null, "Digite Seu lance");
+        if (valorStr == null) {
             return;
         }
-            
-        
-        MyLogger.debug(TAG, "teste");
-        String valorStr = JOptionPane.showInputDialog(null, "Digite Seu lance");
-        double valor = validaLance(valorStr);        
-        
-        
-        leilao.proposta((Comprador)user, valor);
+        double valor = validaLance(valorStr);
+
+        leilao.proposta((Comprador) user, valor);
         atualizaTabela();
+    }
+
+    private double validaLance(String valor) throws ValorInvalido, ValorNaoNumerico {
+        if (valor.isBlank()) {
+            throw new ValorInvalido("Por favor digite algo");
+        }
+
+        try {
+            double valorNum = Double.parseDouble(valor);
+            return valorNum;
+
+        } catch (NumberFormatException e) {
+            throw new ValorNaoNumerico("Por favor digite um numero valido");
+        }
+
+    }
+
+    private void preencherCampos() {
+
+        lbVisualizaLeilaoIdade.setText(String.valueOf(leilao.getIdade()));
+        lbVisualizaLeilaoSubtipo.setText(leilao.getSubtipo());
+        lbVisualizaLeilaoTipo.setText(leilao.getTipo());
+        lbVisualizaLeilaoNome.setText(leilao.getNome());
+        taVisualizaLeilaoDescricao.setText(leilao.getDescricao());
+        lbVisualizaLeilaoEstado.setText(leilao.getEstado());
+
     }
 
 
@@ -275,31 +318,18 @@ public class VisualizaLeilao extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel jlVisualizaLeilao;
     private javax.swing.JLabel jlVizualizaLeilaoNome;
+    private javax.swing.JLabel lbVisualizaLeilaoEstado;
+    private javax.swing.JLabel lbVisualizaLeilaoIdade;
+    private javax.swing.JLabel lbVisualizaLeilaoNome;
+    private javax.swing.JLabel lbVisualizaLeilaoSubtipo;
     private javax.swing.JLabel lbVisualizaLeilaoTipo;
-    private javax.swing.JLabel lbVizualizaLeilaoNome;
+    private javax.swing.JTextArea taVisualizaLeilaoDescricao;
     private javax.swing.JTable tbVisualizaLeilaoLances;
     // End of variables declaration//GEN-END:variables
 
-    private double validaLance(String valor) throws ValorInvalido, ValorNaoNumerico {
-     if(valor.isBlank())
-            throw new ValorInvalido("Por favor digite algo");
-        
-        try{
-            double valorNum = Double.parseDouble(valor);
-            return valorNum;
-                    
-        }catch(NumberFormatException e){
-            throw new ValorNaoNumerico("Por favor digite um numero valido");
-        }
-    
-    }
-
-    
 }

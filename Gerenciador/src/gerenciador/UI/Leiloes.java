@@ -1,5 +1,6 @@
 package gerenciador.UI;
 
+import gerenciador.Exceptions.CompradorNaoTemPermissoes;
 import gerenciador.Exceptions.IdadeInvalida;
 import gerenciador.Exceptions.LeilaoNaoEncontrado;
 import gerenciador.Exceptions.LeilaoNaoSelecionadoParaVisualizar;
@@ -12,10 +13,11 @@ import gerenciador.Herancas.Pessoa;
 import gerenciador.Interfaces.ObjetoVenda;
 import gerenciador.LojaDeLeiloes;
 import gerenciador.Model.Lance;
-import gerenciador.Model.Leilao;
+import gerenciador.Controller.Leilao;
 import gerenciador.Model.Animais.Boi;
 import gerenciador.Model.Comprador;
 import gerenciador.MyLogger;
+import static gerenciador.utils.FrameUtils.setScreenPosition;
 import static gerenciador.utils.JOptionsPaneUtil.showErrorMessage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -46,6 +48,8 @@ public class Leiloes extends javax.swing.JFrame {
             System.out.println("DataBase not found");
             //ex.printStackTrace();
         }
+        setOnClose();
+        setScreenPosition(this);
         this.user = user;
     }
 
@@ -194,11 +198,13 @@ public class Leiloes extends javax.swing.JFrame {
 
     private void jbLeiloesAdicionarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLeiloesAdicionarMouseClicked
 
-        new CriaLeilao(this).setVisible(true);//    
-        setVisible(false);
-        return;
-
+        
+        try {
+            criarLeilao();
 //      
+        } catch (CompradorNaoTemPermissoes e) {
+             showErrorMessage(e.getMessage(), "Invalido!");
+        }
 
     }//GEN-LAST:event_jbLeiloesAdicionarMouseClicked
 
@@ -212,7 +218,7 @@ public class Leiloes extends javax.swing.JFrame {
             finalizaLeilao();
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "ErroCaixaNaoSelecionada", JOptionPane.ERROR_MESSAGE);
+             showErrorMessage(e.getMessage(), "Erro!");
         }
 
 
@@ -229,6 +235,9 @@ public class Leiloes extends javax.swing.JFrame {
 
     private void jbLeiloesDeletarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbLeiloesDeletarMouseClicked
         try{
+            if(user instanceof Comprador)
+                throw new CompradorNaoTemPermissoes("Comprador nao pode deletar leilao");
+            
             leiloes.removeLeilao(tbLeilaoLeiloes.getSelectedRow());            
             atualizaTabela();
             
@@ -252,13 +261,18 @@ public class Leiloes extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void Visualizar() throws LeilaoNaoEncontrado, LeilaoNaoSelecionadoParaVisualizar {
+        
+        
         int leilaoIndex = tbLeilaoLeiloes.getSelectedRow();
         Leilao leilao = leiloes.getLeilao(leilaoIndex);
         new VisualizaLeilao(leilao, this, user).setVisible(true);
         setVisible(false);
     }
 
-    private void finalizaLeilao() {
+    private void finalizaLeilao() throws CompradorNaoTemPermissoes {
+        if(user instanceof Comprador)
+            throw new CompradorNaoTemPermissoes("Comprador nao pode finalizar leilao");
+        
         int leilaoIndex = tbLeilaoLeiloes.getSelectedRow();
         leiloes.finalizaLeilao(leilaoIndex);
 
@@ -266,28 +280,19 @@ public class Leiloes extends javax.swing.JFrame {
     }
 
     public void atualizaTabela() {
-        try {
-            System.out.println("salvando");
-            salva();
-        } catch (IOException ex) {
-            Logger.getLogger(Leiloes.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
         DefaultTableModel modelo = (DefaultTableModel) tbLeilaoLeiloes.getModel();
         modelo.setNumRows(0);
-        for (Leilao cont : leiloes.getLeiloes()) {
+        for (Leilao leilao : leiloes.getLeiloes()) {
             modelo.addRow(new Object[]{
-                cont.getNome(),
-                cont.getTipo(),
-                cont.getValorMaisAlto(),                
-                cont.getEstado()});
+                leilao.getNome(),
+                leilao.getTipo(),
+                leilao.getValorMaisAlto(),                
+                leilao.getEstado()});
         }
     }
 
-    void adicionaLeilao(Leilao leilao) {
-        leiloes.adicionaLeilao(leilao);
-        atualizaTabela();
-
-    }
+ 
 
     public Leilao adicionaLeilao(String precoStr, String nome, int idade, String tipo, String subTipo, String descricao) throws PrecoInvalido, NomeInvalido, IdadeInvalida, PrecoNaoNumerico {
         return leiloes.adicionaLeilao(precoStr, nome, idade, tipo, subTipo, descricao);
@@ -295,6 +300,7 @@ public class Leiloes extends javax.swing.JFrame {
 
     public void salva() throws IOException {
 
+        MyLogger.info(TAG, "Salvando");
         String filePath = System.getProperty("user.dir") + "/res";
 
         File file = new File(filePath);
@@ -333,5 +339,31 @@ public class Leiloes extends javax.swing.JFrame {
        leiloes = l;
        atualizaTabela();
     }
+
+    private void criarLeilao() throws CompradorNaoTemPermissoes {
+        if(user instanceof Comprador)
+            throw new CompradorNaoTemPermissoes("Comprador nao pode criar leilao");
+        
+        new CriaLeilao(this).setVisible(true);//    
+        setVisible(false);
+        return;
+
+    }
+    
+    private void setOnClose(){
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                MyLogger.info(TAG, "Fechando e abrindo tela de leiloes");
+                try {
+                    salva();
+                } catch (IOException ex) {
+                    Logger.getLogger(Leiloes.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                super.windowClosing(windowEvent);
+            }
+        });
+    }
+    
 
 }
