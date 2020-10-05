@@ -22,6 +22,7 @@ public class FrameUtils {
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 MyLogger.info(TAG, "Fechando e abrindo tela de leiloes");
                 leiloes.setVisible(true);
+                leiloes.atualizaTabela();
                 super.windowClosing(windowEvent);
             }
         });

@@ -5,7 +5,9 @@
  */
 package gerenciador.Model;
 
+import gerenciador.Exceptions.SemDinheiroParaLance;
 import gerenciador.Herancas.Pessoa;
+import static gerenciador.utils.JOptionsPaneUtil.showSuccessMessage;
 import java.io.Serializable;
 
 /**
@@ -15,17 +17,27 @@ import java.io.Serializable;
 public class Comprador extends Pessoa  {
 
     
-    private float dinheiro;
+    private double dinheiro;
     
-    public Comprador(String nome) {
-        super(nome);
-        this.dinheiro = 666.0f;
-        
-    }
+   
     
-    public Comprador(String nome, float dinheiro) {
+    public Comprador(String nome, double dinheiro) {
         super(nome);
         this.dinheiro = dinheiro;
+        
+    }
+
+    public double getDinheiro() {
+        return dinheiro;
+    }
+
+    public void podeDarLance(double valor) throws SemDinheiroParaLance{
+        if(valor > dinheiro)
+            throw new SemDinheiroParaLance("VOce nao tem dinheiro suficiente para fazer um lance");
+        
+        valor = valor - dinheiro;
+        
+        showSuccessMessage("Lance feito com sucesso, saldo novo: " + valor, "Sucesso");
         
     }
 

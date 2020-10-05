@@ -5,6 +5,7 @@
  */
 package gerenciador.Model;
 
+import gerenciador.Exceptions.SemDinheiroParaLance;
 import gerenciador.Exceptions.ValorMenorQueMaiorLance;
 import gerenciador.Interfaces.ObjetoVenda;
 import java.io.Serializable;
@@ -35,24 +36,15 @@ public class Leilao implements Serializable {
     public String getNome(){
         return objeto.getNome();
     }
+     
     
-
-     public void proposta(String nome, int idade, double dinheiro, Double valor) throws ValorMenorQueMaiorLance {
-        Comprador user = new Comprador(nome);
-        Lance lance = new Lance(user, valor);   
-
-        proposta(lance);
-
-    }
-    
-    
-    public void proposta(Comprador user, Double valor) throws ValorMenorQueMaiorLance {
+    public void proposta(Comprador user, Double valor) throws ValorMenorQueMaiorLance, SemDinheiroParaLance {
         Lance lance = new Lance(user, valor);
         proposta(lance);
 
     }
 
-    public void proposta(Lance lance)  throws ValorMenorQueMaiorLance{
+    public void proposta(Lance lance)  throws ValorMenorQueMaiorLance, SemDinheiroParaLance{
 
         validaLance(lance);
         lances.add(lance);
@@ -61,7 +53,10 @@ public class Leilao implements Serializable {
 
     }
 
-    public boolean validaLance(Lance lance) throws ValorMenorQueMaiorLance{
+    public boolean validaLance(Lance lance) throws ValorMenorQueMaiorLance, SemDinheiroParaLance{
+        
+        lance.getUser().podeDarLance(lance.getValor());      
+        
         if (!lances.isEmpty()) {
             if (lance.getValor() < lances.get(0).getValor()) {
                 throw new ValorMenorQueMaiorLance("Novo lance tem que ser maior que o valor mais alto!");

@@ -46,7 +46,7 @@ public class LojaDeLeiloes implements Serializable {
     }
 
     public void removeLeilao(int indice) throws LeilaoInvalidoParaDeletar {
-        //TODO REFATORAR E CRIAR EXCEPTION
+        
         validaIndice(indice);
         if(leiloes.get(indice).getEstado() == "Ativo")
             throw new LeilaoInvalidoParaDeletar("Nao pode deletar Leilao ativo");

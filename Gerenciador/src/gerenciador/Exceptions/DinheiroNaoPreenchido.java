@@ -7,11 +7,11 @@ package gerenciador.Exceptions;
 
 /**
  *
- * @author igor-
+ * @author PICHAU
  */
-public class ValorInvalido extends Exception {
+public class DinheiroNaoPreenchido extends Exception {
 
-    public ValorInvalido(String msg) {
+    public DinheiroNaoPreenchido(String msg) {
         super(msg);
     }
     

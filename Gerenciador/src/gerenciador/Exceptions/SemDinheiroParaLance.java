@@ -7,11 +7,11 @@ package gerenciador.Exceptions;
 
 /**
  *
- * @author igor-
+ * @author PICHAU
  */
-public class ValorInvalido extends Exception {
+public class SemDinheiroParaLance extends Exception {
 
-    public ValorInvalido(String msg) {
+    public SemDinheiroParaLance(String msg) {
         super(msg);
     }
     

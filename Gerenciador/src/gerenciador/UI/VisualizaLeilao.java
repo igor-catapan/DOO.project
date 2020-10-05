@@ -5,11 +5,15 @@
  */
 package gerenciador.UI;
 
+import gerenciador.Exceptions.SemDinheiroParaLance;
 import gerenciador.Exceptions.ValorNaoNumerico;
 import gerenciador.Exceptions.ValorInvalido;
 import gerenciador.Exceptions.ValorMenorQueMaiorLance;
+import gerenciador.Herancas.Pessoa;
+import gerenciador.Model.Comprador;
 import gerenciador.Model.Lance;
 import gerenciador.Model.Leilao;
+import gerenciador.Model.Leiloeiro;
 import gerenciador.MyLogger;
 import gerenciador.utils.FrameUtils;
 import static gerenciador.utils.JOptionsPaneUtil.showErrorMessage;
@@ -31,10 +35,13 @@ public class VisualizaLeilao extends javax.swing.JFrame {
      */
     private final String TAG = "VisualizaLeilao";
     private Leilao leilao;
+    private Pessoa user;
 
-    public VisualizaLeilao(Leilao leilao, Leiloes leiloes) {
+    public VisualizaLeilao(Leilao leilao, Leiloes leiloes, Pessoa user) {
         initComponents();
         this.leilao = leilao;
+        this.user = user;
+        
         MyLogger.debug(TAG, leilao.getNome());
         atualizaTabela();
 
@@ -242,13 +249,21 @@ public class VisualizaLeilao extends javax.swing.JFrame {
         }
     }
 
-    private void darLance() throws ValorInvalido, ValorNaoNumerico, ValorMenorQueMaiorLance {
+    private void darLance() throws ValorInvalido, ValorNaoNumerico, ValorMenorQueMaiorLance, SemDinheiroParaLance {
+        
+        if(user instanceof Leiloeiro){
+            showErrorMessage("Leloeiro nao pode dar lance", "Problema ao dar lance");
+            return;
+        }
+            
+        
         MyLogger.debug(TAG, "teste");
         String valorStr = JOptionPane.showInputDialog(null, "Digite Seu lance");
-        double valor = validaLance(valorStr);
+        double valor = validaLance(valorStr);        
         
-        leilao.proposta("robson", 37, 646546.0, valor);
-         atualizaTabela();
+        
+        leilao.proposta((Comprador)user, valor);
+        atualizaTabela();
     }
 
 

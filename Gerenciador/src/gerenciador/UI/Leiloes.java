@@ -254,7 +254,7 @@ public class Leiloes extends javax.swing.JFrame {
     private void Visualizar() throws LeilaoNaoEncontrado, LeilaoNaoSelecionadoParaVisualizar {
         int leilaoIndex = tbLeilaoLeiloes.getSelectedRow();
         Leilao leilao = leiloes.getLeilao(leilaoIndex);
-        new VisualizaLeilao(leilao, this).setVisible(true);
+        new VisualizaLeilao(leilao, this, user).setVisible(true);
         setVisible(false);
     }
 

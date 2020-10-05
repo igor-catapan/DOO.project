@@ -2,9 +2,13 @@
 
 package gerenciador.UI;
 
+import gerenciador.Exceptions.DinheiroNaoPreenchido;
+import gerenciador.Exceptions.NomeInvalido;
+import gerenciador.Exceptions.ValorInvalido;
 import gerenciador.Herancas.Pessoa;
 import gerenciador.Model.Comprador;
 import gerenciador.Model.Leiloeiro;
+import static gerenciador.utils.JOptionsPaneUtil.showErrorMessage;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
@@ -31,6 +35,8 @@ public class Login extends javax.swing.JFrame {
         rbLoginLeiloeiro = new javax.swing.JRadioButton();
         rbLoginComprador = new javax.swing.JRadioButton();
         jbLoginEntrar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        tfLoginDinheiro = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,45 +83,57 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("Dinheiro:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lbLoginNome)
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfLoginNome))
+                        .addComponent(tfLoginDinheiro)
+                        .addGap(26, 26, 26))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbLoginEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(rbLoginLeiloeiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(32, 32, 32)
-                                .addComponent(rbLoginComprador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(10, 10, 10)))))
-                .addGap(16, 16, 16))
+                                .addComponent(lbLoginNome)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfLoginNome)
+                                .addGap(10, 10, 10))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jbLoginEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(rbLoginLeiloeiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(32, 32, 32)
+                                        .addComponent(rbLoginComprador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(10, 10, 10)))))
+                        .addGap(16, 16, 16))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(tfLoginNome))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfLoginNome)
                     .addComponent(lbLoginNome, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbLoginLeiloeiro)
                     .addComponent(rbLoginComprador))
-                .addGap(18, 18, 18)
-                .addComponent(jbLoginEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                .addGap(25, 25, 25))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(tfLoginDinheiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addComponent(jbLoginEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,24 +165,33 @@ public class Login extends javax.swing.JFrame {
         String nome = tfLoginNome.getText();
         boolean comprador = rbLoginComprador.isSelected();
         boolean leiloeiro = rbLoginLeiloeiro.isSelected();
-        //new Leiloes().setVisible(true);
-        this.setVisible(false);
-//        if(true)
-//            return;
+        String dinheiro = tfLoginDinheiro.getText();
         
+        double valor = 0;
+        try{
+            valor = validaCampos(nome, dinheiro);
+        }catch(Exception e){
+            showErrorMessage(e.getMessage(), "Preencha Corretamente!");
+            return;
+        }
+                  
         if (leiloeiro)
             new Leiloes((Pessoa) new Leiloeiro(nome)).setVisible(true);
         else if (comprador)
-            new Leiloes((Pessoa) new Comprador(nome, 666f)).setVisible(true);
+            new Leiloes((Pessoa) new Comprador(nome, valor)).setVisible(true);
         else
-            new Leiloes((Pessoa) new Comprador("EUZINHO", 666f)).setVisible(true);
-            //JOptionPane.showMessageDialog(null, "Selecione se você é leiloeiro ou comprador", "ErroCaixaNaoSelecionada", JOptionPane.ERROR_MESSAGE);
+            //new Leiloes((Pessoa) new Comprador("EUZINHO", 666f)).setVisible(true);
+            showErrorMessage("Selecione se você é leiloeiro ou comprador", "Faca uma selecao!");
+            
+            
+        this.setVisible(false);
     }//GEN-LAST:event_jbLoginEntrarActionPerformed
 
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgLoginLeiloeiroComprador;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton jbLoginEntrar;
@@ -172,6 +199,28 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lbLoginTitulo;
     private javax.swing.JRadioButton rbLoginComprador;
     private javax.swing.JRadioButton rbLoginLeiloeiro;
+    private javax.swing.JTextField tfLoginDinheiro;
     private javax.swing.JTextField tfLoginNome;
     // End of variables declaration//GEN-END:variables
+
+    private double validaCampos(String nome, String dinheiro) throws ValorInvalido, DinheiroNaoPreenchido, NomeInvalido {
+        if(nome.isBlank())
+            throw new NomeInvalido("Por favor insira um nome");
+        
+        if(dinheiro.isBlank())
+            throw new DinheiroNaoPreenchido("Por favor insira seu dinheiro");
+        
+        
+        double valor;
+        try{
+            valor = Double.parseDouble(dinheiro);
+            if(valor < 0)
+                throw new NumberFormatException();            
+            
+        }catch(NumberFormatException e){
+            throw new ValorInvalido("Por favor insira um valor valido");
+            
+        }        
+        return valor;
+    }
 }
