@@ -278,7 +278,7 @@ public class VisualizaLeilao extends javax.swing.JFrame {
 
         if (user instanceof Leiloeiro) {
             throw new UsuarioInvalido("Leloeiro nao pode dar lance");
-        }else if(leilao.getEstado() == Leilao.FINALIZADO)
+        }else if(leilao.getEstado().equals(Leilao.FINALIZADO))
             throw new LeilaoFinalizado("Leilao finalizado, nao pode fazer mais lances!");
 
        

@@ -58,6 +58,7 @@ public class Leilao implements Serializable {
 
     public void proposta(Lance lance) throws ValorMenorQueMaiorLance, SemDinheiroParaLance, UsuarioInvalido {
 
+        
         validaLance(lance);
         lances.add(lance);
         Collections.sort(lances);
@@ -67,7 +68,6 @@ public class Leilao implements Serializable {
 
     public boolean validaLance(Lance lance) throws ValorMenorQueMaiorLance, SemDinheiroParaLance, UsuarioInvalido {
 
-        
         
         if (!lances.isEmpty()) {
             if(lance.getUser().equals(lances.get(0).getUser()))

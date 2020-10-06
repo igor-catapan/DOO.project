@@ -103,7 +103,7 @@ public class LojaDeLeiloes implements Serializable {
         }
         
         if (idade < 0) {
-            throw new IdadeInvalida("Por favor coloque uma idade valida (> 0)");
+            throw new IdadeInvalida("Por favor coloque uma idade valida (idade >= 0)");
         }
 
         try {

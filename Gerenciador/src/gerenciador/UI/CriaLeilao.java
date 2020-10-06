@@ -218,7 +218,6 @@ public class CriaLeilao extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
 
-//        spCriaLeilaoIdade.commitEdit();
         
         String preco = tfCriaLeilaoPreco.getText();
         String nome = tfCriaLeilaoNome.getText();
@@ -295,10 +294,10 @@ public class CriaLeilao extends javax.swing.JFrame {
 
     private void mudaSubTipos(String selectedType) {
         switch (selectedType) {
-            case "Animais":
+            case TiposUtil.ANIMAIS:
                 setItens(cbCriaLeilaSuboTipo, TiposUtil.getTiposDeAnimais());
                 break;
-            case "Veiculos":
+            case TiposUtil.VEICULOS:
                 setItens(cbCriaLeilaSuboTipo, TiposUtil.getTiposDeVeiculos());
                 break;
             default:
