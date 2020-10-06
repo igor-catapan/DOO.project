@@ -14,6 +14,7 @@ import gerenciador.Interfaces.ObjetoVenda;
 import gerenciador.LojaDeLeiloes;
 import gerenciador.Model.Lance;
 import gerenciador.Controller.Leilao;
+import gerenciador.Exceptions.LeilaoInvalidoParaFinalizar;
 import gerenciador.Model.Animais.Boi;
 import gerenciador.Model.Comprador;
 import gerenciador.MyLogger;
@@ -229,7 +230,7 @@ public class Leiloes extends javax.swing.JFrame {
         try {
             Visualizar();
         } catch (Exception e) {
-            showErrorMessage(e.getMessage(), "Campos invalidos!");
+            showErrorMessage(e.getMessage(), "Erro ao visualizar!");
         }
     }//GEN-LAST:event_jbLeiloesDarLanceMouseClicked
 
@@ -269,7 +270,7 @@ public class Leiloes extends javax.swing.JFrame {
         setVisible(false);
     }
 
-    private void finalizaLeilao() throws CompradorNaoTemPermissoes {
+    private void finalizaLeilao() throws CompradorNaoTemPermissoes, LeilaoInvalidoParaFinalizar {
         if(user instanceof Comprador)
             throw new CompradorNaoTemPermissoes("Comprador nao pode finalizar leilao");
         
@@ -308,7 +309,7 @@ public class Leiloes extends javax.swing.JFrame {
 
         FileOutputStream fileOut;
 
-        fileOut = new FileOutputStream(filePath + "/test.ser");
+        fileOut = new FileOutputStream(filePath + "/DataBase.ser");
         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 
         out.writeObject(leiloes);
@@ -324,7 +325,7 @@ public class Leiloes extends javax.swing.JFrame {
         File file = new File(filePath);
         System.out.println(file.getAbsolutePath());
 
-        FileInputStream fileIn = new FileInputStream(filePath + "/test.ser");
+        FileInputStream fileIn = new FileInputStream(filePath + "/DataBase.ser");
         ObjectInputStream in = new ObjectInputStream(fileIn);
 
         LojaDeLeiloes l;

@@ -41,6 +41,22 @@ public class Comprador extends Pessoa  {
         
     }
 
+
+
+    @Override
+    public boolean equals(Object obj) {
+      
+        if (obj == null) {
+            return false;
+        }
+      
+        final Comprador other = (Comprador) obj;
+       
+        return this.nome.equals(other.nome);
+        
+       
+    }
+
   
     
 

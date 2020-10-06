@@ -18,7 +18,7 @@ public class JOptionsPaneUtil {
     }
     
       public static void showSuccessMessage(String message, String titulo){
-        JOptionPane.showMessageDialog(null, message, titulo, JOptionPane.OK_OPTION);
+        JOptionPane.showMessageDialog(null, message, titulo, JOptionPane.INFORMATION_MESSAGE);
     }
     
 }

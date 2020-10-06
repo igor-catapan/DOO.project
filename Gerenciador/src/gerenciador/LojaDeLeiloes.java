@@ -5,6 +5,7 @@
  */
 package gerenciador;
 
+import gerenciador.Exceptions.LeilaoInvalidoParaFinalizar;
 import gerenciador.Exceptions.LeilaoInvalidoParaDeletar;
 import gerenciador.Exceptions.IdadeInvalida;
 import gerenciador.Exceptions.PrecoNaoNumerico;
@@ -36,10 +37,13 @@ public class LojaDeLeiloes implements Serializable {
 
     }
 
-    public void finalizaLeilao(int indice) {
+    public void finalizaLeilao(int indice) throws LeilaoInvalidoParaFinalizar {
         validaIndice(indice);
 
         Leilao leilao = leiloes.get(indice);
+        if(leilao.getQuantidadeDeLances() == 0)
+            throw new LeilaoInvalidoParaFinalizar("Nao pode finalizar leilao sem lance, delete ou espere!");
+        
         leilao.setEstado(Leilao.FINALIZADO);
        
 
