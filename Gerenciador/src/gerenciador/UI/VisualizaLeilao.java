@@ -338,7 +338,7 @@ public class VisualizaLeilao extends javax.swing.JFrame {
         lbVisualizaLeilaoNome.setText(leilao.getNome());
         taVisualizaLeilaoDescricao.setText(leilao.getDescricao());
         lbVisualizaLeilaoEstado.setText(leilao.getEstado());
-        lbVisualizaLeilaoValorInicial.setText(String.valueOf("R$ "leilao.getValorInicial()));
+        lbVisualizaLeilaoValorInicial.setText(String.valueOf("R$ " + leilao.getValorInicial()));
 
     }
 
