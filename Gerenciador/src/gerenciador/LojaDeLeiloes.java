@@ -23,10 +23,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author PICHAU
- */
+//principal controlador se comunica com a tela de leiloes
 public class LojaDeLeiloes implements Serializable {
 
     
@@ -38,6 +35,7 @@ public class LojaDeLeiloes implements Serializable {
 
     }
 
+    //
     public void finalizaLeilao(int indice) throws LeilaoInvalidoParaFinalizar {
         validaIndice(indice);
 
@@ -50,18 +48,20 @@ public class LojaDeLeiloes implements Serializable {
 
     }
 
+    //remove somente caso esteja finalizado ou sem lances
     public void removeLeilao(int indice) throws LeilaoInvalidoParaDeletar {
         
         validaIndice(indice);
         Leilao leilao = leiloes.get(indice);
         
-        if(leilao.getEstado() == Leilao.ATIVO && leilao.getQuantidadeDeLances() != 0)
+        if(leilao.getEstado().equals(Leilao.ATIVO) && leilao.getQuantidadeDeLances() != 0)
             throw new LeilaoInvalidoParaDeletar("Nao pode deletar Leilao ativo e com lances");
         
         leiloes.remove(indice);
 
     }
 
+    //valida o leilao selecionado
     private void validaIndice(int index) throws LeilaoNaoEncontrado, LeilaoNaoSelecionadoParaVisualizar {
         if (index < 0) {
             throw new LeilaoNaoSelecionadoParaVisualizar("Por favor selecione um leião");
@@ -83,6 +83,8 @@ public class LojaDeLeiloes implements Serializable {
         return leiloes.get(leilaoIndex);
     }
 
+    
+    //adiciona leilao e cria objeto de venda de acordo com as propriedades
     public Leilao adicionaLeilao(String precoStr, String nome, int idade, String tipo, String subTipo, String descricao) throws PrecoInvalido, NomeInvalido, IdadeInvalida, PrecoNaoNumerico {
         validaCampos(precoStr, nome, idade);
 
@@ -95,6 +97,7 @@ public class LojaDeLeiloes implements Serializable {
 
     }
 
+    //valida as informacoes passadas para o usuarios
     private void validaCampos(String precoStr, String nome, int idade) throws PrecoInvalido, NomeInvalido, IdadeInvalida, PrecoNaoNumerico {
         if (precoStr.isBlank()) {
             throw new PrecoInvalido("Por favor preencha o preco");
