@@ -111,7 +111,7 @@ public class VisualizaLeilao extends javax.swing.JFrame {
         taVisualizaLeilaoDescricao.setColumns(20);
         taVisualizaLeilaoDescricao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         taVisualizaLeilaoDescricao.setRows(5);
-        taVisualizaLeilaoDescricao.setText("\n");
+        taVisualizaLeilaoDescricao.setText("                                                                                       \n         \n");
         jScrollPane2.setViewportView(taVisualizaLeilaoDescricao);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -120,15 +120,27 @@ public class VisualizaLeilao extends javax.swing.JFrame {
 
         jlVizualizaLeilaoNome.setText("Nome do item: ");
 
+        lbVisualizaLeilaoNome.setText("                                    ");
+
         jlVisualizaLeilao.setText("Tipo:");
+
+        lbVisualizaLeilaoTipo.setText("           ");
 
         jLabel6.setText("Valor Inicial:");
 
+        lbVisualizaLeilaoValorInicial.setText("            ");
+
         jLabel3.setText("Estado:");
+
+        lbVisualizaLeilaoEstado.setText("             ");
 
         jLabel2.setText("Subtipo:");
 
+        lbVisualizaLeilaoSubtipo.setText("      ");
+
         jLabel5.setText("Idade:");
+
+        lbVisualizaLeilaoIdade.setText("             ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
