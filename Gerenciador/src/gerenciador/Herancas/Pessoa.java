@@ -30,23 +30,6 @@ abstract public class Pessoa implements Serializable{
         this.nome = nome;
     }
 
-   
-
-//    @Override
-//    public boolean equals(Object obj) {
-//      
-//        if (obj == null) {
-//            return false;
-//        }
-//        
-//        final Pessoa other = (Pessoa) obj;
-//        if (this.nome == other.nome) {
-//            return true;
-//        }
-//        
-//        return false;
-//    }
-    
-    
+      
     
 }

@@ -165,19 +165,21 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_rbLoginLeiloeiroActionPerformed
 
     private void jbLoginEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLoginEntrarActionPerformed
+        
         String nome = tfLoginNome.getText();
         boolean comprador = rbLoginComprador.isSelected();
         boolean leiloeiro = rbLoginLeiloeiro.isSelected();
         String dinheiro = tfLoginDinheiro.getText();
 
+        //verifica qual tipo de usuario e inicia a sessao de acordo
         if (leiloeiro) {
             iniciarLeiloeiro(nome);
         } else if (comprador) {
             iniciarComprador(nome, dinheiro);
-            
-        } else         
+
+        } else {
             showErrorMessage("Selecione se você é leiloeiro ou comprador", "Faca uma selecao!");
-        
+        }
 
 
     }//GEN-LAST:event_jbLoginEntrarActionPerformed
@@ -197,6 +199,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField tfLoginNome;
     // End of variables declaration//GEN-END:variables
 
+    
+    //valida os campos de nome e dinheiro caso seja comprador
     private double validaCampos(String nome, String dinheiro) throws ValorInvalido, DinheiroNaoPreenchido, NomeInvalido {
         if (nome.isBlank()) {
             throw new NomeInvalido("Por favor insira um nome");
@@ -220,13 +224,15 @@ public class Login extends javax.swing.JFrame {
         return valor;
     }
 
-     private void validaCampos(String nome) throws NomeInvalido {
+    //valida o nome caso seja leiloeiro
+    private void validaCampos(String nome) throws NomeInvalido {
         if (nome.isBlank()) {
             throw new NomeInvalido("Por favor insira um nome");
         }
-        
+
     }
-    
+
+    //seta um listener que esconde dinheiro ou mostra caso seja leiloeiro/comprador
     private void setSelectionListener() {
         setDinheiroVisibilidade(false);
         ActionListener listener = new ActionListener() {
@@ -242,35 +248,35 @@ public class Login extends javax.swing.JFrame {
 
     }
 
+    //esconde ou moestra dinheiro
     private void setDinheiroVisibilidade(boolean selected) {
-        
+
         lbLoginDinheiro.setVisible(selected);
         tfLoginDinheiro.setVisible(selected);
     }
 
     private void iniciarLeiloeiro(String nome) {
-         try {
-                validaCampos(nome);
-            } catch (Exception e) {
-                showErrorMessage(e.getMessage(), "Preencha Corretamente!");
-                return;
-            }
-            new Leiloes((Pessoa) new Leiloeiro(nome)).setVisible(true);
-            this.setVisible(false);
+        try {
+            validaCampos(nome);
+        } catch (Exception e) {
+            showErrorMessage(e.getMessage(), "Preencha Corretamente!");
+            return;
+        }
+        new Leiloes((Pessoa) new Leiloeiro(nome)).setVisible(true);
+        this.setVisible(false);
     }
 
     private void iniciarComprador(String nome, String dinheiro) {
         double valor = 0;
-            try {
-                valor = validaCampos(nome, dinheiro);
-            } catch (Exception e) {
-                showErrorMessage(e.getMessage(), "Preencha Corretamente!");
-                return;
-            }
+        try {
+            valor = validaCampos(nome, dinheiro);
+        } catch (Exception e) {
+            showErrorMessage(e.getMessage(), "Preencha Corretamente!");
+            return;
+        }
 
-            new Leiloes((Pessoa) new Comprador(nome, valor)).setVisible(true);
-            this.setVisible(false);
+        new Leiloes((Pessoa) new Comprador(nome, valor)).setVisible(true);
+        this.setVisible(false);
     }
 
-  
 }

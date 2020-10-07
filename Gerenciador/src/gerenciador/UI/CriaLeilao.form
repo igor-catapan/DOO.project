@@ -77,7 +77,7 @@
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="169" max="-2" attributes="0"/>
-                          <Component id="jButton1" max="32767" attributes="0"/>
+                          <Component id="btCriaLeilaoCriar" max="32767" attributes="0"/>
                           <EmptySpace min="140" pref="140" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -156,7 +156,7 @@
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                  <Component id="jButton1" max="32767" attributes="0"/>
+                  <Component id="btCriaLeilaoCriar" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -200,12 +200,12 @@
         </Component>
         <Component class="javax.swing.JSpinner" name="spCriaLeilaoIdade">
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="btCriaLeilaoCriar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Criar"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btCriaLeilaoCriarMouseClicked"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">

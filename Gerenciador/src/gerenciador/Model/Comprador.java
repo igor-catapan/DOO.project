@@ -31,6 +31,7 @@ public class Comprador extends Pessoa  {
         return dinheiro;
     }
 
+    //verifica se o comprador tem dinheiro para fazer o lance e se puder faz
     public void podeDarLance(double valor) throws SemDinheiroParaLance{
         if(valor > dinheiro)
             throw new SemDinheiroParaLance("VOce nao tem dinheiro suficiente para fazer um lance (" + dinheiro + ")");
@@ -40,9 +41,7 @@ public class Comprador extends Pessoa  {
         showSuccessMessage("Lance feito com sucesso, saldo novo: " + dinheiro, "Sucesso");
         
     }
-
-
-
+    
     @Override
     public boolean equals(Object obj) {
       
@@ -55,6 +54,10 @@ public class Comprador extends Pessoa  {
         return this.nome.equals(other.nome);
         
        
+    }
+
+    public void setDinheiro(double valor) {
+        dinheiro = valor;
     }
 
   

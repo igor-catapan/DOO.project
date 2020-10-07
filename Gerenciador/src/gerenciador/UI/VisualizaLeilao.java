@@ -51,6 +51,7 @@ public class VisualizaLeilao extends javax.swing.JFrame {
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         FrameUtils.setClosingEvent(TAG, this, leiloes);
 
+        //para a descricao ir para baixo e nao ser editavel
         taVisualizaLeilaoDescricao.setLineWrap(true);
         taVisualizaLeilaoDescricao.setWrapStyleWord(true);
         taVisualizaLeilaoDescricao.setEditable(false);
@@ -110,7 +111,7 @@ public class VisualizaLeilao extends javax.swing.JFrame {
         taVisualizaLeilaoDescricao.setColumns(20);
         taVisualizaLeilaoDescricao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         taVisualizaLeilaoDescricao.setRows(5);
-        taVisualizaLeilaoDescricao.setText("Moto de trilha, semi-nova. Conservada, correia e \namortecedor novos");
+        taVisualizaLeilaoDescricao.setText("\n");
         jScrollPane2.setViewportView(taVisualizaLeilaoDescricao);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -119,27 +120,15 @@ public class VisualizaLeilao extends javax.swing.JFrame {
 
         jlVizualizaLeilaoNome.setText("Nome do item: ");
 
-        lbVisualizaLeilaoNome.setText("Crf 230");
-
         jlVisualizaLeilao.setText("Tipo:");
-
-        lbVisualizaLeilaoTipo.setText("Veiculo");
 
         jLabel6.setText("Valor Inicial:");
 
-        lbVisualizaLeilaoValorInicial.setText("R$ 1600");
-
         jLabel3.setText("Estado:");
-
-        lbVisualizaLeilaoEstado.setText("Finalizado");
 
         jLabel2.setText("Subtipo:");
 
-        lbVisualizaLeilaoSubtipo.setText("Moto");
-
         jLabel5.setText("Idade:");
-
-        lbVisualizaLeilaoIdade.setText("1.2 anos");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -278,6 +267,7 @@ public class VisualizaLeilao extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btVisualizaLeilaoDarLanceMouseClicked
 
+    //atualiza a tabela com os lances
     public void atualizaTabela() {
 
         DefaultTableModel modelo = (DefaultTableModel) tbVisualizaLeilaoLances.getModel();
@@ -290,14 +280,15 @@ public class VisualizaLeilao extends javax.swing.JFrame {
         }
     }
 
+    //abre joptionpane para dar lance
     private void darLance() throws ValorInvalido, ValorNaoNumerico, ValorMenorQueMaiorLance, SemDinheiroParaLance, UsuarioInvalido, LeilaoFinalizado {
 
         if (user instanceof Leiloeiro) {
             throw new UsuarioInvalido("Leloeiro nao pode dar lance");
-        }else if(leilao.getEstado().equals(Leilao.FINALIZADO))
+        } else if (leilao.getEstado().equals(Leilao.FINALIZADO)) {
             throw new LeilaoFinalizado("Leilao finalizado, nao pode fazer mais lances!");
+        }
 
-       
         String valorStr = JOptionPane.showInputDialog(null, "Digite Seu lance");
         if (valorStr == null) {
             return;
@@ -308,6 +299,8 @@ public class VisualizaLeilao extends javax.swing.JFrame {
         atualizaTabela();
     }
 
+    
+    //valida o campo se é um numero valido
     private double validaLance(String valor) throws ValorInvalido, ValorNaoNumerico {
         if (valor.isBlank()) {
             throw new ValorInvalido("Por favor digite algo");
@@ -323,6 +316,8 @@ public class VisualizaLeilao extends javax.swing.JFrame {
 
     }
 
+    
+    //preenche a tabela com informacoes
     private void preencherCampos() {
 
         lbVisualizaLeilaoIdade.setText(String.valueOf(leilao.getIdade()) + " anos.");

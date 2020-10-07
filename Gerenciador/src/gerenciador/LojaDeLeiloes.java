@@ -29,6 +29,7 @@ import java.util.List;
  */
 public class LojaDeLeiloes implements Serializable {
 
+    
     private ArrayList<Leilao> leiloes = new ArrayList<>();
     
 

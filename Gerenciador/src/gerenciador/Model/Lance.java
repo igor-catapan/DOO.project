@@ -41,6 +41,11 @@ public class Lance implements Comparable<Lance>, Serializable{
     public int compareTo(Lance o) {
        return Double.compare(o.getValor(), this.valor);
     }
+
+    //devolve dinheiro para o comprador antigo
+    public void estornar() {
+        user.setDinheiro(user.getDinheiro() + valor);
+    }
     
           
             

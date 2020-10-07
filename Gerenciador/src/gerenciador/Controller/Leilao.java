@@ -20,8 +20,11 @@ import java.util.List;
  *
  * @author PICHAU
  */
+
+//classe que controla o leilao
 public class Leilao implements Serializable {
 
+    //estados do leilao, pois novos lances só podem ser feitos caso esteja ativo
     public static final String ATIVO = "Ativo";
     public static final String FINALIZADO = "Finalizado";
 
@@ -63,9 +66,14 @@ public class Leilao implements Serializable {
         lances.add(lance);
         Collections.sort(lances);
         valorMaisAlto = lances.get(0).getValor();
+        
+        retornaDinheiroAntigoComprador();
 
     }
 
+    //Verifica se é um lance valido seguindo os seguintes criterios:
+    //  fez o ultimo lance
+    //  lance menor que o ultimo ou que o valor inicial
     public boolean validaLance(Lance lance) throws ValorMenorQueMaiorLance, SemDinheiroParaLance, UsuarioInvalido {
 
         
@@ -76,7 +84,7 @@ public class Leilao implements Serializable {
                 throw new ValorMenorQueMaiorLance("Novo lance tem que ser maior que o valor mais alto!");
             }
         }else if (lance.getValor() <= getValorInicial()) {
-                throw new ValorMenorQueMaiorLance("Novo lance tem que ser maior que o valor mais alto!");
+                throw new ValorMenorQueMaiorLance("Novo lance tem que ser maior que o valor inicial!");
            }
             
         lance.getUser().podeDarLance(lance.getValor());
@@ -121,6 +129,15 @@ public class Leilao implements Serializable {
 
     public int getQuantidadeDeLances() {
         return lances.size();
+    }
+
+    //devolve o dinheiro do ulitmo comprador caso alguem faça lance maior
+    private void retornaDinheiroAntigoComprador() {
+        if(lances.size() < 2)
+            return;
+        
+        lances.get(1).estornar();
+                    
     }
 
 }
