@@ -300,6 +300,9 @@ public class CriaLeilao extends javax.swing.JFrame {
             case TiposUtil.VEICULOS:
                 setItens(cbCriaLeilaSuboTipo, TiposUtil.getTiposDeVeiculos());
                 break;
+            case TiposUtil.OUTROS:
+                setItens(cbCriaLeilaSuboTipo, TiposUtil.getTiposDeOutros());
+                break;
             default:
                 cbCriaLeilaSuboTipo.removeAllItems();
                 break;

@@ -5,6 +5,7 @@
  */
 package gerenciador.Herancas;
 
+import gerenciador.utils.TiposUtil;
 import java.io.Serializable;
 
 /**
@@ -14,7 +15,7 @@ import java.io.Serializable;
 public abstract class Veiculo implements Serializable{
     
     protected String nome;
-    protected String tipo = "Veiculo";
+    protected String tipo = TiposUtil.VEICULOS;
     protected double valor;
     protected String descricao;
     protected int idade;

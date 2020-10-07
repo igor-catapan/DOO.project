@@ -8,6 +8,8 @@ package gerenciador.utils;
 import gerenciador.Interfaces.ObjetoVenda;
 import gerenciador.Model.Animais.Boi;
 import gerenciador.Model.Animais.Ovelha;
+import gerenciador.Model.Outros.Brinquedo;
+import gerenciador.Model.Outros.Utensilios;
 import gerenciador.Model.Veiculos.Carro;
 import gerenciador.Model.Veiculos.Moto;
 import gerenciador.Model.Veiculos.Trator;
@@ -18,6 +20,7 @@ public class TiposUtil {
     //TIPO
     public static final String VEICULOS = "Veiculos";
     public static final String ANIMAIS = "Animais";
+    public static final String OUTROS = "Outros";
     
     //SUBTIPO
     public static final String MOTO = "Motos";
@@ -25,6 +28,8 @@ public class TiposUtil {
     public static final String CARRO = "Carros";
     public static final String OVELHA = "Ovelha";
     public static final String BOI = "Boi";
+    public static final String BRINQUEDO = "Brinquedo";
+    public static final String UTENSILIOS = "Utensilios";
     
     
 
@@ -33,6 +38,16 @@ public class TiposUtil {
         List<String> lista = new LinkedList<String>();
         lista.add(ANIMAIS);
         lista.add(VEICULOS);
+        lista.add(OUTROS);
+
+        return lista;
+
+    }
+    
+     public static List<String> getTiposDeOutros() {
+        List<String> lista = new LinkedList<String>();
+        lista.add(BRINQUEDO);
+        lista.add(UTENSILIOS);
 
         return lista;
 
@@ -77,6 +92,12 @@ public class TiposUtil {
         } else if (subTipo ==  MOTO){
             Moto moto = Moto.criaMoto(preco, nome, idade, descricao);
             obj = moto;
+        }else if (subTipo == UTENSILIOS){
+            Utensilios utensilios = Utensilios.criaUtensilios(preco, nome, idade, descricao);
+            obj = utensilios;
+        }else if (subTipo == BRINQUEDO){
+            Brinquedo brinquedo = Brinquedo.criaBrinquedo(preco, nome, idade, descricao);
+            obj = brinquedo;
         }
         return obj;
     }
