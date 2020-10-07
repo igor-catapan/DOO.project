@@ -19,6 +19,7 @@ public class FrameUtils {
 
     public static void setClosingEvent(String TAG, JFrame frame, Leiloes leiloes) {
 
+        //abre a tela de leiloes quando fecha qualquer uma das outras(menos o login)
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
@@ -30,6 +31,7 @@ public class FrameUtils {
         });
     }
 
+    //seta a tela no meio do monitor
     public static void setScreenPosition(JFrame frame) {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);

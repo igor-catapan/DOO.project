@@ -13,11 +13,7 @@ import gerenciador.Model.Veiculos.Moto;
 import gerenciador.Model.Veiculos.Trator;
 import java.util.LinkedList;
 import java.util.List;
-
-/**
- *
- * @author PICHAU
- */
+//para facilitar a criacao de objetos de venda
 public class TiposUtil {
     //TIPO
     public static final String VEICULOS = "Veiculos";
@@ -32,6 +28,7 @@ public class TiposUtil {
     
     
 
+    
     public static List<String> getTipos() {
         List<String> lista = new LinkedList<String>();
         lista.add(ANIMAIS);
